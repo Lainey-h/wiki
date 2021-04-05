@@ -1,6 +1,7 @@
 package com.lainey.wiki.controller;
 
 import com.lainey.wiki.domain.Ebook;
+import com.lainey.wiki.resp.CommonResp;
 import com.lainey.wiki.service.EbookService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,9 +22,11 @@ public class EbookController {
 
 
     @GetMapping("/list")//接口
-    public List<Ebook> list(){
-
-        return ebookService.list();
+    public CommonResp list(){
+        CommonResp<List<Ebook>> resp = new CommonResp<>();
+        List<Ebook> list =ebookService.list();
+        resp.setContent(list);
+        return resp;
     }
 
 }
