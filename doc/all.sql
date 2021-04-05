@@ -37,6 +37,6 @@ create table `ebook`(
 
 insert into `ebook`(id,name,description) value (1,'Spring boot 入门教程零基础入门Java开发','企业级应用开发最佳首选方案');
 insert into `ebook`(id,name,description) value (2,'Vue 入门教程零基础入门Vue开发','企业级应用开发最佳首选框架');
-insert into `ebook`(id,name,description) value (3,'Spring boot 入门教程,零基础入门Python开发','企业级应用开发最佳首选方案');
-insert into `ebook`(id,name,description) value (4,'Spring boot 入门教程,零基础入门Mysql开发','企业级应用开发最佳首选方案');
-insert into `ebook`(id,name,description) value (5,'Spring boot 入门教程,零基础入门Oracle开发','企业级应用开发最佳首选框架');
+insert into `ebook`(id,name,description) value (3,'Python入门教程,零基础入门开发','企业级应用开发最佳首选方案');
+insert into `ebook`(id,name,description) value (4,'Mysql入门教程,零基础入门开发','企业级应用开发最佳首选方案');
+insert into `ebook`(id,name,description) value (5,'Oracle入门教程,零基础入门开发','企业级应用开发最佳首选框架');
