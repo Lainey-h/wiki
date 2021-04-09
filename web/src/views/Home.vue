@@ -57,24 +57,44 @@
     <a-layout-content
         :style="{ background: '#fff', padding: '24px', margin: 0, minHeight: '280px' }"
     >
-      Content
+      <pre>
+        {{ebooks}}
+        {{ebooks2}}
+      </pre>
+
     </a-layout-content>
+
   </a-layout>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent,onMounted,ref,reactive,toRef} from 'vue';
 import axios from'axios';
+import _default from "ant-design-vue/es/vc-trigger/Popup";
+import data = _default.data;
 
 export default defineComponent({
   name: 'Home',
   components: {
   },
-  setup(){
+  setup: function () {
     console.log("setup");
-    axios.get("http://localhost:8880/ebook/list?name=Spring\n").then((response) => {
-      console.log(response)
+    const ebooks=ref();// 响应式数据
+    const ebooks1=reactive({books:[]})
+
+    onMounted(() => {
+      console.log("onMounted");
+      axios.get("http://localhost:8880/ebook/list?name=Spring\n").then((response) => {
+        const data =response.data;// 在response里面有一个data，对应的是我们后端CommonResp的数据结构。（data=commonResp）
+        ebooks.value=data.content;
+        ebooks1.books=data.content;
+        console.log(response)
+      })
     })
+    return {
+      ebooks,// html代码要拿到响应式变量，需要在setup最后return
+      ebooks2:toRef(ebooks1,"books")
+    }
   }
 });
 </script>
