@@ -1,6 +1,8 @@
 package com.lainey.wiki.controller;
 
-import com.lainey.wiki.domain.Main;
+import com.lainey.wiki.req.MainReq;
+import com.lainey.wiki.resp.CommonResp;
+import com.lainey.wiki.resp.MainResp;
 import com.lainey.wiki.service.MainService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,9 +23,11 @@ public class MainController {
 
 
     @GetMapping("/list")//接口
-    public List<Main> list(){
 
-        return mainService.list();
+    public CommonResp list(MainReq req){
+        CommonResp<List<MainResp>> resp = new CommonResp<>();
+        List<MainResp> list =mainService.list(req);
+        resp.setContent(list);
+        return resp;
     }
-
 }
