@@ -60,6 +60,7 @@
       <pre>
         {{ebooks}}
         {{ebooks2}}
+        {{mains}}
       </pre>
 
     </a-layout-content>
@@ -71,7 +72,7 @@
 import { defineComponent,onMounted,ref,reactive,toRef} from 'vue';
 import axios from'axios';
 import _default from "ant-design-vue/es/vc-trigger/Popup";
-import data = _default.data;
+// import data = _default.data;
 
 export default defineComponent({
   name: 'Home',
@@ -81,6 +82,7 @@ export default defineComponent({
     console.log("setup");
     const ebooks=ref();// 响应式数据
     const ebooks1=reactive({books:[]})
+    const mains=ref();
 
     onMounted(() => {
       console.log("onMounted");
@@ -90,10 +92,15 @@ export default defineComponent({
         ebooks1.books=data.content;
         console.log(response)
       })
+      axios.get("http://localhost:8880/main/list?albh=2009052812388\n").then((response) => {
+        const data=response.data;
+        mains.value=data.content;
+      })
     })
     return {
       ebooks,// html代码要拿到响应式变量，需要在setup最后return
-      ebooks2:toRef(ebooks1,"books")
+      ebooks2:toRef(ebooks1,"books"),
+      mains,
     }
   }
 });
