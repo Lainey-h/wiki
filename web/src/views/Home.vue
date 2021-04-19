@@ -135,7 +135,6 @@ export default defineComponent({
   name: 'Home',
 
   setup: function () {
-    console.log("setup");
     // const ebooks = ref();// 响应式数据
     // const ebooks1=reactive({books:[]})
     const param = ref();
@@ -402,7 +401,6 @@ export default defineComponent({
         const data =response.data;// 在response里面有一个data，对应的是我们后端CommonResp的数据结构。（data=commonResp）
         mains.value=data.content;
         ebooks1.books=data.content;
-        console.log(response)
       })*/
       /*axios.get("http://localhost:8880/main/list").then((response) => {
         const data=response.data;
