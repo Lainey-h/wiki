@@ -377,7 +377,7 @@ export default defineComponent({
 
     const handleQuery = (params: any) => {
       loading.value=true;
-      axios.get("http://127.0.0.1:8880/main/list",params).then((response) => {
+      axios.get(process.env.VUE_APP_SERVER+"/main/list",params).then((response) => {
         loading.value = false;
         const data = response.data;
         mains.value = data.content;
@@ -396,7 +396,7 @@ export default defineComponent({
     };
 
     onMounted(() => {
-      console.log("onMounted");
+      console.log("onMounted111");
       handleQuery({});
     /*  axios.get("http://localhost:8880/main/list?name=Spring\n").then((response) => {
         const data =response.data;// 在response里面有一个data，对应的是我们后端CommonResp的数据结构。（data=commonResp）
