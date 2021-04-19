@@ -7,6 +7,7 @@ import com.lainey.wiki.req.MainReq;
 import com.lainey.wiki.resp.MainResp;
 import com.lainey.wiki.util.CopyUtil;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -20,7 +21,9 @@ public class MainService {
     public List<MainResp> list(MainReq req){
         MainExample mainExample = new MainExample();
         MainExample.Criteria criteria=mainExample.createCriteria();
-        criteria.andAlbhEqualTo(req.getAlbh());
+        if (!ObjectUtils.isEmpty(req.getAlbh())){
+            criteria.andAlbhEqualTo(req.getAlbh());
+        }
         List<Main> mainList = mainMapper.selectByExample(mainExample);
 
       /*  List<MainResp> respList = new ArrayList<>();

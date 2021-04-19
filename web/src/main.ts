@@ -7,7 +7,7 @@ import 'ant-design-vue/dist/antd.css';
 import * as Icons from '@ant-design/icons-vue';
 
 const app =createApp(App)
-app.use(store).use(router).use(Antd).mount('#app');// hll在 'App' 后加了一个any 解决Tsetse45问题
+app.use(store).use(router).use(Antd).mount('#app');
 
 
 // 全局使用图标

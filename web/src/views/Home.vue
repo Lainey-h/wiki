@@ -57,7 +57,18 @@
     <a-layout-content
         :style="{ background: '#fff', padding: '24px', margin: 0, minHeight: '280px' }"
     >
-      <a-table :data-source="data" :columns="columns">
+      <a-table
+          :data-source="mains"
+          :columns="columns"
+          :row-key="record => record.albh"
+          :pagination="pagination"
+          :loading="loading"
+          :scroll="{x: 1500, y: 1000}"
+          @change="handleTableChange"
+      >
+        <template #action>
+          <a>action</a>
+        </template>
         <template #filterDropdown="{ setSelectedKeys, selectedKeys, confirm, clearFilters, column }">
           <div style="padding: 8px">
             <a-input
@@ -85,8 +96,8 @@
         <template #filterIcon="filtered">
           <search-outlined :style="{ color: filtered ? '#108ee9' : undefined }" />
         </template>
-        <template #customRender="{ text, column }">
-      <span v-if="searchText && searchedColumn === column.dataIndex">
+          <template #customRender="{ text, column }">
+        <span v-if="searchText && searchedColumn === column.dataIndex">
         <template
             v-for="(fragment, i) in text
             .toString()
@@ -116,47 +127,26 @@
 <script lang="ts">
 import { defineComponent,onMounted,ref,reactive,toRef} from 'vue';
 import axios from'axios';
-// import _default from "ant-design-vue/es/vc-trigger/Popup"; // 这里是在添加表格组件的时候写的 never use 暂时注释掉
-// import data = _default.data;
-import { SearchOutlined } from '@ant-design/icons-vue';
-
-const data = [
-  {
-    key: '1',
-    name: 'John Brown',
-    age: 32,
-    address: 'New York No. 1 Lake Park',
-  },
-  {
-    key: '2',
-    name: 'Joe Black',
-    age: 42,
-    address: 'London No. 1 Lake Park',
-  },
-  {
-    key: '3',
-    name: 'Jim Green',
-    age: 32,
-    address: 'Sidney No. 1 Lake Park',
-  },
-  {
-    key: '4',
-    name: 'Jim Red',
-    age: 32,
-    address: 'London No. 2 Lake Park',
-  },
-];
+import _default from "ant-design-vue/es/vc-trigger/Popup"; // 这里是在添加表格组件的时候写的 never use 暂时注释掉
+import data = _default.data;
+// import { SearchOutlined } from '@ant-design/icons-vue';
 
 export default defineComponent({
   name: 'Home',
-  components: {
-    SearchOutlined,
-  },
+
   setup: function () {
     console.log("setup");
-    const ebooks=ref();// 响应式数据
-    const ebooks1=reactive({books:[]})
+    // const ebooks = ref();// 响应式数据
+    // const ebooks1=reactive({books:[]})
+    const param = ref();
+    param.value = {};
     const mains=ref();
+    const  pagination = ref({
+      current: 1,
+      pageSize: 8,
+      total: 0
+    });1
+    const loading = ref(false);
 
     const state = reactive({
       searchText: '',
@@ -167,16 +157,17 @@ export default defineComponent({
 
     const columns = [
       {
-        title: 'Name',
-        dataIndex: 'name',
-        key: 'name',
+        title: '案例编号',
+        dataIndex: 'albh',
+        width: 150,
+        fixed: 'left',
         slots: {
           filterDropdown: 'filterDropdown',
           filterIcon: 'filterIcon',
           customRender: 'customRender',
         },
         onFilter: (value: any, record: any) =>
-            record.name.toString().toLowerCase().includes(value.toLowerCase()),
+            record.albh.toString().toLowerCase().includes(value.toLowerCase()),
         onFilterDropdownVisibleChange: (visible: any) => {
           if (visible) {
             setTimeout(() => {
@@ -187,16 +178,16 @@ export default defineComponent({
         },
       },
       {
-        title: 'Age',
-        dataIndex: 'age',
-        key: 'age',
+        title: '井号',
+        dataIndex: 'jh',
+        width: 50,
         slots: {
           filterDropdown: 'filterDropdown',
           filterIcon: 'filterIcon',
           customRender: 'customRender',
         },
         onFilter: (value: any, record: any) =>
-            record.age.toString().toLowerCase().includes(value.toLowerCase()),
+            record.jh.toString().toLowerCase().includes(value.toLowerCase()),
         onFilterDropdownVisibleChange: (visible: any) => {
           if (visible) {
             setTimeout(() => {
@@ -206,16 +197,16 @@ export default defineComponent({
         },
       },
       {
-        title: 'Address',
-        dataIndex: 'address',
-        key: 'address',
+        title: '油田名称',
+        dataIndex: 'ytmc',
+        width: 50,
         slots: {
           filterDropdown: 'filterDropdown',
           filterIcon: 'filterIcon',
           customRender: 'customRender',
         },
         onFilter: (value: any, record: any) =>
-            record.address.toString().toLowerCase().includes(value.toLowerCase()),
+            record.ytmc.toString().toLowerCase().includes(value.toLowerCase()),
         onFilterDropdownVisibleChange: (visible: any) => {
           if (visible) {
             setTimeout(() => {
@@ -224,6 +215,153 @@ export default defineComponent({
           }
         },
       },
+      {
+        title: '井型',
+        dataIndex: 'jx',
+        width: 50,
+        slots: {
+          filterDropdown: 'filterDropdown',
+          filterIcon: 'filterIcon',
+          customRender: 'customRender',
+        },
+        onFilter: (value: any, record: any) =>
+            record.jx.toString().toLowerCase().includes(value.toLowerCase()),
+        onFilterDropdownVisibleChange: (visible: any) => {
+          if (visible) {
+            setTimeout(() => {
+              console.log(searchInput.value);
+              searchInput.value.focus();
+            }, 0);
+          }
+        },
+      },
+      {
+        title: '事故类型',
+        dataIndex: 'sglx',
+        width: 50,
+        slots: {
+          filterDropdown: 'filterDropdown',
+          filterIcon: 'filterIcon',
+          customRender: 'customRender',
+        },
+        onFilter: (value: any, record: any) =>
+            record.sglx.toString().toLowerCase().includes(value.toLowerCase()),
+        onFilterDropdownVisibleChange: (visible: any) => {
+          if (visible) {
+            setTimeout(() => {
+              console.log(searchInput.value);
+              searchInput.value.focus();
+            }, 0);
+          }
+        },
+      },
+      {
+        title: '钻遇地层',
+        dataIndex: 'zydc',
+        width: 50,
+        slots: {
+          filterDropdown: 'filterDropdown',
+          filterIcon: 'filterIcon',
+          customRender: 'customRender',
+        },
+        onFilter: (value: any, record: any) =>
+            record.zydc.toString().toLowerCase().includes(value.toLowerCase()),
+        onFilterDropdownVisibleChange: (visible: any) => {
+          if (visible) {
+            setTimeout(() => {
+              console.log(searchInput.value);
+              searchInput.value.focus();
+            }, 0);
+          }
+        },
+      },
+      {
+        title: '事故发生起始井深',
+        dataIndex: 'zs',
+        width: 50,
+        slots: {
+          filterDropdown: 'filterDropdown',
+          filterIcon: 'filterIcon',
+          customRender: 'customRender',
+        },
+        onFilter: (value: any, record: any) =>
+            record.zs.toString().toLowerCase().includes(value.toLowerCase()),
+        onFilterDropdownVisibleChange: (visible: any) => {
+          if (visible) {
+            setTimeout(() => {
+              console.log(searchInput.value);
+              searchInput.value.focus();
+            }, 0);
+          }
+        },
+      },
+      {
+        title: '事故发生终止井深',
+        dataIndex: 'zzjs',
+        width: 50,
+        slots: {
+          filterDropdown: 'filterDropdown',
+          filterIcon: 'filterIcon',
+          customRender: 'customRender',
+        },
+        onFilter: (value: any, record: any) =>
+            record.zzjs.toString().toLowerCase().includes(value.toLowerCase()),
+        onFilterDropdownVisibleChange: (visible: any) => {
+          if (visible) {
+            setTimeout(() => {
+              console.log(searchInput.value);
+              searchInput.value.focus();
+            }, 0);
+          }
+        },
+      },
+      {
+        title: '损失时间',
+        dataIndex: 'sssj',
+        width: 50,
+        slots: {
+          filterDropdown: 'filterDropdown',
+          filterIcon: 'filterIcon',
+          customRender: 'customRender',
+        },
+        onFilter: (value: any, record: any) =>
+            record.sssj.toString().toLowerCase().includes(value.toLowerCase()),
+        onFilterDropdownVisibleChange: (visible: any) => {
+          if (visible) {
+            setTimeout(() => {
+              console.log(searchInput.value);
+              searchInput.value.focus();
+            }, 0);
+          }
+        },
+      },
+      {
+        title: '事故发生时间',
+        dataIndex: 'sgfssj',
+        width: 50,
+        slots: {
+          filterDropdown: 'filterDropdown',
+          filterIcon: 'filterIcon',
+          customRender: 'customRender',
+        },
+        onFilter: (value: any, record: any) =>
+            record.sgfssj.toString().toLowerCase().includes(value.toLowerCase()),
+        onFilterDropdownVisibleChange: (visible: any) => {
+          if (visible) {
+            setTimeout(() => {
+              console.log(searchInput.value);
+              searchInput.value.focus();
+            }, 0);
+          }
+        },
+      },
+      {
+        title: 'Action',
+        key: 'operation',
+        fixed: 'right',
+        width: 100,
+        slots: { customRender: 'action' },
+      }
     ];
 
     const handleSearch = (selectedKeys: any, confirm: any, dataIndex: any) => {
@@ -237,31 +375,54 @@ export default defineComponent({
       state.searchText = '';
     };
 
+    const handleQuery = (params: any) => {
+      loading.value=true;
+      axios.get("http://127.0.0.1:8880/main/list",params).then((response) => {
+        loading.value = false;
+        const data = response.data;
+        mains.value = data.content;
+        // 重置分页按钮
+        pagination.value.current = params.page;
+      })
+    }
+
+    // 表格点击页码时触发
+    const handleTableChange = (pagination: any) => {
+      console.log("看看自带的分页参数都有啥：" + pagination);
+      handleQuery({
+        page: pagination.current,
+        size: pagination.pageSize
+      });
+    };
+
     onMounted(() => {
       console.log("onMounted");
-      axios.get("http://localhost:8880/ebook/list?name=Spring\n").then((response) => {
+      handleQuery({});
+    /*  axios.get("http://localhost:8880/main/list?name=Spring\n").then((response) => {
         const data =response.data;// 在response里面有一个data，对应的是我们后端CommonResp的数据结构。（data=commonResp）
-        ebooks.value=data.content;
+        mains.value=data.content;
         ebooks1.books=data.content;
         console.log(response)
-      })
-      axios.get("http://localhost:8880/main/list?albh=2009052812388\n").then((response) => {
+      })*/
+      /*axios.get("http://localhost:8880/main/list").then((response) => {
         const data=response.data;
         mains.value=data.content;
-      })
+      })*/
     })
     return {
-      ebooks,// html代码要拿到响应式变量，需要在setup最后return
-      ebooks2:toRef(ebooks1,"books"),
+      // ebooks// html代码要拿到响应式变量，需要在setup最后return
+      // ebooks2:toRef(ebooks1,"books"),
       mains,
-
-      data,
       columns,
       handleSearch,
       handleReset,
       searchText: '',
       searchInput,
       searchedColumn: '',
+
+      loading,
+      pagination,
+      handleTableChange,
     }
   }
 });
