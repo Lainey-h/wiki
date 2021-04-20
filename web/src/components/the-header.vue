@@ -11,7 +11,7 @@
         <router-link to="/">首页</router-link> |
       </a-menu-item>
       <a-menu-item key="/admin/main">
-        <router-link to="">案例管理</router-link> |
+        <router-link to="/admin/main">案例管理</router-link> |
       </a-menu-item>
       <a-menu-item key="/about">
         <router-link to="/about">关于我们</router-link> |
