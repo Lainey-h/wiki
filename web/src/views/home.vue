@@ -67,7 +67,9 @@
           @change="handleTableChange"
       >
         <template #action>
-          <a>action</a>
+          <a-button type="primary">
+            详情
+          </a-button>
         </template>
         <template #filterDropdown="{ setSelectedKeys, selectedKeys, confirm, clearFilters, column }">
           <div style="padding: 8px">
