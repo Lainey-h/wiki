@@ -2,7 +2,7 @@ package com.lainey.wiki.req;
 
 import java.util.Date;
 
-public class MainReq {
+public class MainReq extends PageReq{
     private String albh;
 
     private String jh;
