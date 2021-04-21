@@ -131,6 +131,8 @@ import { defineComponent,onMounted,ref,reactive,toRef} from 'vue';
 import axios from'axios';
 import _default from "ant-design-vue/es/vc-trigger/Popup"; // 这里是在添加表格组件的时候写的 never use 暂时注释掉
 import data = _default.data;
+import _default from "ant-design-vue/es/color-picker";
+import size = _default.props.size;
 // import { SearchOutlined } from '@ant-design/icons-vue';
 
 export default defineComponent({
@@ -378,12 +380,19 @@ export default defineComponent({
 
     const handleQuery = (params: any) => {
       loading.value=true;
-      axios.get("/main/list",params).then((response) => {
+      axios.get("/main/list",{
+        params:{
+          page: params.page,
+          size: params.size
+        }
+      }).then((response) => {
+
         loading.value = false;
         const data = response.data;
-        mains.value = data.content;
+        mains.value = data.content.list;
         // 重置分页按钮
         pagination.value.current = params.page;
+        pagination.value.total = data.content.total;
       })
     }
 
@@ -398,7 +407,10 @@ export default defineComponent({
 
     onMounted(() => {
       console.log("onMounted222");
-      handleQuery({});
+      handleQuery({
+        page: 1,
+        size: pagination.value.pageSize
+      });
     /*  axios.get("http://localhost:8880/main/list?name=Spring\n").then((response) => {
         const data =response.data;// 在response里面有一个data，对应的是我们后端CommonResp的数据结构。（data=commonResp）
         mains.value=data.content;
