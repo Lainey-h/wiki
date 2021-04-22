@@ -67,7 +67,7 @@
           @change="handleTableChange"
       >
         <template #action>
-          <a-button type="primary">
+          <a-button type="primary" @click=" ">
             详情
           </a-button>
         </template>
