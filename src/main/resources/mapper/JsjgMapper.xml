@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lainey.wiki.mapper.JsjgMapper">
+  <resultMap id="BaseResultMap" type="com.lainey.wiki.domain.Jsjg">
+    <id column="albh" jdbcType="VARCHAR" property="albh" />
+    <result column="tgdbsd" jdbcType="DOUBLE" property="tgdbsd" />
+    <result column="tgwj" jdbcType="DOUBLE" property="tgwj" />
+    <result column="tgxsd" jdbcType="DOUBLE" property="tgxsd" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.lainey.wiki.domain.Jsjg">
+    <result column="tgmc" jdbcType="LONGVARCHAR" property="tgmc" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    albh, tgdbsd, tgwj, tgxsd
+  </sql>
+  <sql id="Blob_Column_List">
+    tgmc
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.lainey.wiki.domain.JsjgExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from jsjg
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.lainey.wiki.domain.JsjgExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from jsjg
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from jsjg
+    where albh = #{albh,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from jsjg
+    where albh = #{albh,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.lainey.wiki.domain.JsjgExample">
+    delete from jsjg
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.lainey.wiki.domain.Jsjg">
+    insert into jsjg (albh, tgdbsd, tgwj, 
+      tgxsd, tgmc)
+    values (#{albh,jdbcType=VARCHAR}, #{tgdbsd,jdbcType=DOUBLE}, #{tgwj,jdbcType=DOUBLE}, 
+      #{tgxsd,jdbcType=DOUBLE}, #{tgmc,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lainey.wiki.domain.Jsjg">
+    insert into jsjg
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="albh != null">
+        albh,
+      </if>
+      <if test="tgdbsd != null">
+        tgdbsd,
+      </if>
+      <if test="tgwj != null">
+        tgwj,
+      </if>
+      <if test="tgxsd != null">
+        tgxsd,
+      </if>
+      <if test="tgmc != null">
+        tgmc,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="albh != null">
+        #{albh,jdbcType=VARCHAR},
+      </if>
+      <if test="tgdbsd != null">
+        #{tgdbsd,jdbcType=DOUBLE},
+      </if>
+      <if test="tgwj != null">
+        #{tgwj,jdbcType=DOUBLE},
+      </if>
+      <if test="tgxsd != null">
+        #{tgxsd,jdbcType=DOUBLE},
+      </if>
+      <if test="tgmc != null">
+        #{tgmc,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.lainey.wiki.domain.JsjgExample" resultType="java.lang.Long">
+    select count(*) from jsjg
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update jsjg
+    <set>
+      <if test="record.albh != null">
+        albh = #{record.albh,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tgdbsd != null">
+        tgdbsd = #{record.tgdbsd,jdbcType=DOUBLE},
+      </if>
+      <if test="record.tgwj != null">
+        tgwj = #{record.tgwj,jdbcType=DOUBLE},
+      </if>
+      <if test="record.tgxsd != null">
+        tgxsd = #{record.tgxsd,jdbcType=DOUBLE},
+      </if>
+      <if test="record.tgmc != null">
+        tgmc = #{record.tgmc,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update jsjg
+    set albh = #{record.albh,jdbcType=VARCHAR},
+      tgdbsd = #{record.tgdbsd,jdbcType=DOUBLE},
+      tgwj = #{record.tgwj,jdbcType=DOUBLE},
+      tgxsd = #{record.tgxsd,jdbcType=DOUBLE},
+      tgmc = #{record.tgmc,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update jsjg
+    set albh = #{record.albh,jdbcType=VARCHAR},
+      tgdbsd = #{record.tgdbsd,jdbcType=DOUBLE},
+      tgwj = #{record.tgwj,jdbcType=DOUBLE},
+      tgxsd = #{record.tgxsd,jdbcType=DOUBLE}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lainey.wiki.domain.Jsjg">
+    update jsjg
+    <set>
+      <if test="tgdbsd != null">
+        tgdbsd = #{tgdbsd,jdbcType=DOUBLE},
+      </if>
+      <if test="tgwj != null">
+        tgwj = #{tgwj,jdbcType=DOUBLE},
+      </if>
+      <if test="tgxsd != null">
+        tgxsd = #{tgxsd,jdbcType=DOUBLE},
+      </if>
+      <if test="tgmc != null">
+        tgmc = #{tgmc,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where albh = #{albh,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.lainey.wiki.domain.Jsjg">
+    update jsjg
+    set tgdbsd = #{tgdbsd,jdbcType=DOUBLE},
+      tgwj = #{tgwj,jdbcType=DOUBLE},
+      tgxsd = #{tgxsd,jdbcType=DOUBLE},
+      tgmc = #{tgmc,jdbcType=LONGVARCHAR}
+    where albh = #{albh,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lainey.wiki.domain.Jsjg">
+    update jsjg
+    set tgdbsd = #{tgdbsd,jdbcType=DOUBLE},
+      tgwj = #{tgwj,jdbcType=DOUBLE},
+      tgxsd = #{tgxsd,jdbcType=DOUBLE}
+    where albh = #{albh,jdbcType=VARCHAR}
+  </update>
+</mapper>

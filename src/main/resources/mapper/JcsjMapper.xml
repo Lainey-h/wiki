@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lainey.wiki.mapper.JcsjMapper">
+  <resultMap id="BaseResultMap" type="com.lainey.wiki.domain.Jcsj">
+    <id column="albh" jdbcType="VARCHAR" property="albh" />
+    <result column="bz" jdbcType="VARCHAR" property="bz" />
+    <result column="qz" jdbcType="DOUBLE" property="qz" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.lainey.wiki.domain.Jcsj">
+    <result column="sjlx" jdbcType="LONGVARCHAR" property="sjlx" />
+    <result column="sjmx" jdbcType="LONGVARCHAR" property="sjmx" />
+    <result column="sjz" jdbcType="LONGVARCHAR" property="sjz" />
+    <result column="dw" jdbcType="LONGVARCHAR" property="dw" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    albh, bz, qz
+  </sql>
+  <sql id="Blob_Column_List">
+    sjlx, sjmx, sjz, dw
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.lainey.wiki.domain.JcsjExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from jcsj
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.lainey.wiki.domain.JcsjExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from jcsj
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from jcsj
+    where albh = #{albh,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from jcsj
+    where albh = #{albh,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.lainey.wiki.domain.JcsjExample">
+    delete from jcsj
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.lainey.wiki.domain.Jcsj">
+    insert into jcsj (albh, bz, qz, 
+      sjlx, sjmx, sjz, 
+      dw)
+    values (#{albh,jdbcType=VARCHAR}, #{bz,jdbcType=VARCHAR}, #{qz,jdbcType=DOUBLE}, 
+      #{sjlx,jdbcType=LONGVARCHAR}, #{sjmx,jdbcType=LONGVARCHAR}, #{sjz,jdbcType=LONGVARCHAR}, 
+      #{dw,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lainey.wiki.domain.Jcsj">
+    insert into jcsj
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="albh != null">
+        albh,
+      </if>
+      <if test="bz != null">
+        bz,
+      </if>
+      <if test="qz != null">
+        qz,
+      </if>
+      <if test="sjlx != null">
+        sjlx,
+      </if>
+      <if test="sjmx != null">
+        sjmx,
+      </if>
+      <if test="sjz != null">
+        sjz,
+      </if>
+      <if test="dw != null">
+        dw,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="albh != null">
+        #{albh,jdbcType=VARCHAR},
+      </if>
+      <if test="bz != null">
+        #{bz,jdbcType=VARCHAR},
+      </if>
+      <if test="qz != null">
+        #{qz,jdbcType=DOUBLE},
+      </if>
+      <if test="sjlx != null">
+        #{sjlx,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="sjmx != null">
+        #{sjmx,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="sjz != null">
+        #{sjz,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="dw != null">
+        #{dw,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.lainey.wiki.domain.JcsjExample" resultType="java.lang.Long">
+    select count(*) from jcsj
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update jcsj
+    <set>
+      <if test="record.albh != null">
+        albh = #{record.albh,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bz != null">
+        bz = #{record.bz,jdbcType=VARCHAR},
+      </if>
+      <if test="record.qz != null">
+        qz = #{record.qz,jdbcType=DOUBLE},
+      </if>
+      <if test="record.sjlx != null">
+        sjlx = #{record.sjlx,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.sjmx != null">
+        sjmx = #{record.sjmx,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.sjz != null">
+        sjz = #{record.sjz,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.dw != null">
+        dw = #{record.dw,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update jcsj
+    set albh = #{record.albh,jdbcType=VARCHAR},
+      bz = #{record.bz,jdbcType=VARCHAR},
+      qz = #{record.qz,jdbcType=DOUBLE},
+      sjlx = #{record.sjlx,jdbcType=LONGVARCHAR},
+      sjmx = #{record.sjmx,jdbcType=LONGVARCHAR},
+      sjz = #{record.sjz,jdbcType=LONGVARCHAR},
+      dw = #{record.dw,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update jcsj
+    set albh = #{record.albh,jdbcType=VARCHAR},
+      bz = #{record.bz,jdbcType=VARCHAR},
+      qz = #{record.qz,jdbcType=DOUBLE}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lainey.wiki.domain.Jcsj">
+    update jcsj
+    <set>
+      <if test="bz != null">
+        bz = #{bz,jdbcType=VARCHAR},
+      </if>
+      <if test="qz != null">
+        qz = #{qz,jdbcType=DOUBLE},
+      </if>
+      <if test="sjlx != null">
+        sjlx = #{sjlx,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="sjmx != null">
+        sjmx = #{sjmx,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="sjz != null">
+        sjz = #{sjz,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="dw != null">
+        dw = #{dw,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where albh = #{albh,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.lainey.wiki.domain.Jcsj">
+    update jcsj
+    set bz = #{bz,jdbcType=VARCHAR},
+      qz = #{qz,jdbcType=DOUBLE},
+      sjlx = #{sjlx,jdbcType=LONGVARCHAR},
+      sjmx = #{sjmx,jdbcType=LONGVARCHAR},
+      sjz = #{sjz,jdbcType=LONGVARCHAR},
+      dw = #{dw,jdbcType=LONGVARCHAR}
+    where albh = #{albh,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lainey.wiki.domain.Jcsj">
+    update jcsj
+    set bz = #{bz,jdbcType=VARCHAR},
+      qz = #{qz,jdbcType=DOUBLE}
+    where albh = #{albh,jdbcType=VARCHAR}
+  </update>
+</mapper>

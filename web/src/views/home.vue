@@ -131,8 +131,8 @@ import { defineComponent,onMounted,ref,reactive,toRef} from 'vue';
 import axios from'axios';
 import _default from "ant-design-vue/es/vc-trigger/Popup"; // 这里是在添加表格组件的时候写的 never use 暂时注释掉
 import data = _default.data;
-import _default from "ant-design-vue/es/color-picker";
-import size = _default.props.size;
+// import _default from "ant-design-vue/es/color-picker";// default重名 注释掉了
+// import size = _default.props.size;
 // import { SearchOutlined } from '@ant-design/icons-vue';
 
 export default defineComponent({
