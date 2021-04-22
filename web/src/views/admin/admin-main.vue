@@ -12,12 +12,12 @@
           :scroll="{x: 1500, y: 1000}"
           @change="handleTableChange"
       >
-        <template #action >
+        <template #action="{ text, record}" >
           <a-space size="small">
             <a-button type="primary" size="small">
               文档管理
             </a-button>
-            <a-button type="primary" size="small">
+            <a-button type="primary" size="small" @click="edit()">
               编辑
             </a-button>
           </a-space>
@@ -75,6 +75,14 @@
     </a-layout-content>
 
   </a-layout>
+  <a-modal
+    title="案例表单"
+    v-model:visible="modalVisible"
+    :confirm-loading="modalLoading"
+    @ok="handleModalOk"
+    >
+    <p>test</p>
+  </a-modal>
 </template>
 
 <script lang="ts">
@@ -346,6 +354,23 @@ export default defineComponent({
         size: pagination.pageSize
       });
     };
+    //------------表单--------------
+    const main = ref({});
+    const modalVisible = ref(false);
+    const modalLoading = ref(false);
+    const handleModalOk = () => {
+      modalLoading.value = true;
+      setTimeout(() => {
+        modalLoading.value = false;
+        modalVisible.value = false;
+      }, 2000);
+    };
+    /**
+     * 编辑
+     */
+    const edit = () => {
+      modalVisible.value = true;
+    };
 
     onMounted(() => {
       console.log("onMounted222");
@@ -377,6 +402,12 @@ export default defineComponent({
       loading,
       pagination,
       handleTableChange,
+
+      edit,
+
+      modalVisible,
+      modalLoading,
+      handleModalOk
     }
   }
 });
