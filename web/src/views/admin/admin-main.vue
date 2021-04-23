@@ -3,6 +3,11 @@
     <a-layout-content
         :style="{ background: '#fff', padding: '24px', margin: 0, minHeight: '280px' }"
     >
+      <p>
+        <a-button type="primary" size="large" @click="add()">
+          新增
+        </a-button>
+      </p>
       <a-table
           :data-source="mains"
           :columns="columns"
@@ -410,6 +415,15 @@ export default defineComponent({
       modalVisible.value = true;
       main.value = record
     };
+    /**
+     * 新增
+     */
+    const add= () => {
+      modalVisible.value = true;
+      main.value = {}
+    };
+
+
     const onTimeChange = (value: Moment[], dateString: string[]) => {
       console.log('Selected Time: ', value);
       console.log('Formatted Selected Time: ', dateString);
@@ -453,6 +467,7 @@ export default defineComponent({
       handleTableChange,
 
       edit,
+      add,
 
       main,
       modalVisible,

@@ -10,6 +10,7 @@ import com.lainey.wiki.req.MainSaveReq;
 import com.lainey.wiki.resp.MainQueryResp;
 import com.lainey.wiki.resp.PageResp;
 import com.lainey.wiki.util.CopyUtil;
+import com.lainey.wiki.util.SnowFlake;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -25,6 +26,10 @@ public class MainService {
 
     @Resource
     private MainMapper mainMapper;
+
+    @Resource
+    private SnowFlake snowFlake;
+
 
     public PageResp<MainQueryResp> list(MainReq req){
         MainExample mainExample = new MainExample();
@@ -66,6 +71,7 @@ public class MainService {
         Main main = CopyUtil.copy(req, Main.class);
         if (ObjectUtils.isEmpty(req.getAlbh())) {
             // 新增
+            main.setAlbh(snowFlake.nextId());
             mainMapper.insert(main);
         } else {
             // 更新
