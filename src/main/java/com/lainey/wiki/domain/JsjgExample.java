@@ -114,62 +114,52 @@ public class JsjgExample {
             return (Criteria) this;
         }
 
-        public Criteria andAlbhEqualTo(String value) {
+        public Criteria andAlbhEqualTo(Long value) {
             addCriterion("albh =", value, "albh");
             return (Criteria) this;
         }
 
-        public Criteria andAlbhNotEqualTo(String value) {
+        public Criteria andAlbhNotEqualTo(Long value) {
             addCriterion("albh <>", value, "albh");
             return (Criteria) this;
         }
 
-        public Criteria andAlbhGreaterThan(String value) {
+        public Criteria andAlbhGreaterThan(Long value) {
             addCriterion("albh >", value, "albh");
             return (Criteria) this;
         }
 
-        public Criteria andAlbhGreaterThanOrEqualTo(String value) {
+        public Criteria andAlbhGreaterThanOrEqualTo(Long value) {
             addCriterion("albh >=", value, "albh");
             return (Criteria) this;
         }
 
-        public Criteria andAlbhLessThan(String value) {
+        public Criteria andAlbhLessThan(Long value) {
             addCriterion("albh <", value, "albh");
             return (Criteria) this;
         }
 
-        public Criteria andAlbhLessThanOrEqualTo(String value) {
+        public Criteria andAlbhLessThanOrEqualTo(Long value) {
             addCriterion("albh <=", value, "albh");
             return (Criteria) this;
         }
 
-        public Criteria andAlbhLike(String value) {
-            addCriterion("albh like", value, "albh");
-            return (Criteria) this;
-        }
-
-        public Criteria andAlbhNotLike(String value) {
-            addCriterion("albh not like", value, "albh");
-            return (Criteria) this;
-        }
-
-        public Criteria andAlbhIn(List<String> values) {
+        public Criteria andAlbhIn(List<Long> values) {
             addCriterion("albh in", values, "albh");
             return (Criteria) this;
         }
 
-        public Criteria andAlbhNotIn(List<String> values) {
+        public Criteria andAlbhNotIn(List<Long> values) {
             addCriterion("albh not in", values, "albh");
             return (Criteria) this;
         }
 
-        public Criteria andAlbhBetween(String value1, String value2) {
+        public Criteria andAlbhBetween(Long value1, Long value2) {
             addCriterion("albh between", value1, value2, "albh");
             return (Criteria) this;
         }
 
-        public Criteria andAlbhNotBetween(String value1, String value2) {
+        public Criteria andAlbhNotBetween(Long value1, Long value2) {
             addCriterion("albh not between", value1, value2, "albh");
             return (Criteria) this;
         }

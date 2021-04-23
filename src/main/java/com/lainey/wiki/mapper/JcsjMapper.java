@@ -2,15 +2,16 @@ package com.lainey.wiki.mapper;
 
 import com.lainey.wiki.domain.Jcsj;
 import com.lainey.wiki.domain.JcsjExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface JcsjMapper {
     long countByExample(JcsjExample example);
 
     int deleteByExample(JcsjExample example);
 
-    int deleteByPrimaryKey(String albh);
+    int deleteByPrimaryKey(Long albh);
 
     int insert(Jcsj record);
 
@@ -20,7 +21,7 @@ public interface JcsjMapper {
 
     List<Jcsj> selectByExample(JcsjExample example);
 
-    Jcsj selectByPrimaryKey(String albh);
+    Jcsj selectByPrimaryKey(Long albh);
 
     int updateByExampleSelective(@Param("record") Jcsj record, @Param("example") JcsjExample example);
 

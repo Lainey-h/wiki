@@ -2,15 +2,16 @@ package com.lainey.wiki.mapper;
 
 import com.lainey.wiki.domain.Jsjg;
 import com.lainey.wiki.domain.JsjgExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface JsjgMapper {
     long countByExample(JsjgExample example);
 
     int deleteByExample(JsjgExample example);
 
-    int deleteByPrimaryKey(String albh);
+    int deleteByPrimaryKey(Long albh);
 
     int insert(Jsjg record);
 
@@ -20,7 +21,7 @@ public interface JsjgMapper {
 
     List<Jsjg> selectByExample(JsjgExample example);
 
-    Jsjg selectByPrimaryKey(String albh);
+    Jsjg selectByPrimaryKey(Long albh);
 
     int updateByExampleSelective(@Param("record") Jsjg record, @Param("example") JsjgExample example);
 

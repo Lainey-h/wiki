@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lainey.wiki.mapper.FszzMapper">
   <resultMap id="BaseResultMap" type="com.lainey.wiki.domain.Fszz">
-    <id column="albh" jdbcType="VARCHAR" property="albh" />
+    <id column="albh" jdbcType="BIGINT" property="albh" />
     <result column="qz" jdbcType="DOUBLE" property="qz" />
   </resultMap>
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.lainey.wiki.domain.Fszz">
@@ -109,17 +109,17 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
     select 
     <include refid="Base_Column_List" />
     ,
     <include refid="Blob_Column_List" />
     from fszz
-    where albh = #{albh,jdbcType=VARCHAR}
+    where albh = #{albh,jdbcType=BIGINT}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from fszz
-    where albh = #{albh,jdbcType=VARCHAR}
+    where albh = #{albh,jdbcType=BIGINT}
   </delete>
   <delete id="deleteByExample" parameterType="com.lainey.wiki.domain.FszzExample">
     delete from fszz
@@ -132,7 +132,7 @@
       sgfsqhbs, sgzzlx, sgzzbm, 
       ydzk, ydcs, dw, 
       sxlb)
-    values (#{albh,jdbcType=VARCHAR}, #{qz,jdbcType=DOUBLE}, #{gzfs,jdbcType=LONGVARCHAR}, 
+    values (#{albh,jdbcType=BIGINT}, #{qz,jdbcType=DOUBLE}, #{gzfs,jdbcType=LONGVARCHAR}, 
       #{sgfsqhbs,jdbcType=LONGVARCHAR}, #{sgzzlx,jdbcType=LONGVARCHAR}, #{sgzzbm,jdbcType=LONGVARCHAR}, 
       #{ydzk,jdbcType=LONGVARCHAR}, #{ydcs,jdbcType=LONGVARCHAR}, #{dw,jdbcType=LONGVARCHAR}, 
       #{sxlb,jdbcType=LONGVARCHAR})
@@ -173,7 +173,7 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="albh != null">
-        #{albh,jdbcType=VARCHAR},
+        #{albh,jdbcType=BIGINT},
       </if>
       <if test="qz != null">
         #{qz,jdbcType=DOUBLE},
@@ -214,7 +214,7 @@
     update fszz
     <set>
       <if test="record.albh != null">
-        albh = #{record.albh,jdbcType=VARCHAR},
+        albh = #{record.albh,jdbcType=BIGINT},
       </if>
       <if test="record.qz != null">
         qz = #{record.qz,jdbcType=DOUBLE},
@@ -250,7 +250,7 @@
   </update>
   <update id="updateByExampleWithBLOBs" parameterType="map">
     update fszz
-    set albh = #{record.albh,jdbcType=VARCHAR},
+    set albh = #{record.albh,jdbcType=BIGINT},
       qz = #{record.qz,jdbcType=DOUBLE},
       gzfs = #{record.gzfs,jdbcType=LONGVARCHAR},
       sgfsqhbs = #{record.sgfsqhbs,jdbcType=LONGVARCHAR},
@@ -266,7 +266,7 @@
   </update>
   <update id="updateByExample" parameterType="map">
     update fszz
-    set albh = #{record.albh,jdbcType=VARCHAR},
+    set albh = #{record.albh,jdbcType=BIGINT},
       qz = #{record.qz,jdbcType=DOUBLE}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -303,7 +303,7 @@
         sxlb = #{sxlb,jdbcType=LONGVARCHAR},
       </if>
     </set>
-    where albh = #{albh,jdbcType=VARCHAR}
+    where albh = #{albh,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.lainey.wiki.domain.Fszz">
     update fszz
@@ -316,11 +316,11 @@
       ydcs = #{ydcs,jdbcType=LONGVARCHAR},
       dw = #{dw,jdbcType=LONGVARCHAR},
       sxlb = #{sxlb,jdbcType=LONGVARCHAR}
-    where albh = #{albh,jdbcType=VARCHAR}
+    where albh = #{albh,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.lainey.wiki.domain.Fszz">
     update fszz
     set qz = #{qz,jdbcType=DOUBLE}
-    where albh = #{albh,jdbcType=VARCHAR}
+    where albh = #{albh,jdbcType=BIGINT}
   </update>
 </mapper>

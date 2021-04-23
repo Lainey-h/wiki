@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lainey.wiki.mapper.JsjgMapper">
   <resultMap id="BaseResultMap" type="com.lainey.wiki.domain.Jsjg">
-    <id column="albh" jdbcType="VARCHAR" property="albh" />
+    <id column="albh" jdbcType="BIGINT" property="albh" />
     <result column="tgdbsd" jdbcType="DOUBLE" property="tgdbsd" />
     <result column="tgwj" jdbcType="DOUBLE" property="tgwj" />
     <result column="tgxsd" jdbcType="DOUBLE" property="tgxsd" />
@@ -104,17 +104,17 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
     select 
     <include refid="Base_Column_List" />
     ,
     <include refid="Blob_Column_List" />
     from jsjg
-    where albh = #{albh,jdbcType=VARCHAR}
+    where albh = #{albh,jdbcType=BIGINT}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from jsjg
-    where albh = #{albh,jdbcType=VARCHAR}
+    where albh = #{albh,jdbcType=BIGINT}
   </delete>
   <delete id="deleteByExample" parameterType="com.lainey.wiki.domain.JsjgExample">
     delete from jsjg
@@ -125,7 +125,7 @@
   <insert id="insert" parameterType="com.lainey.wiki.domain.Jsjg">
     insert into jsjg (albh, tgdbsd, tgwj, 
       tgxsd, tgmc)
-    values (#{albh,jdbcType=VARCHAR}, #{tgdbsd,jdbcType=DOUBLE}, #{tgwj,jdbcType=DOUBLE}, 
+    values (#{albh,jdbcType=BIGINT}, #{tgdbsd,jdbcType=DOUBLE}, #{tgwj,jdbcType=DOUBLE}, 
       #{tgxsd,jdbcType=DOUBLE}, #{tgmc,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.lainey.wiki.domain.Jsjg">
@@ -149,7 +149,7 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="albh != null">
-        #{albh,jdbcType=VARCHAR},
+        #{albh,jdbcType=BIGINT},
       </if>
       <if test="tgdbsd != null">
         #{tgdbsd,jdbcType=DOUBLE},
@@ -175,7 +175,7 @@
     update jsjg
     <set>
       <if test="record.albh != null">
-        albh = #{record.albh,jdbcType=VARCHAR},
+        albh = #{record.albh,jdbcType=BIGINT},
       </if>
       <if test="record.tgdbsd != null">
         tgdbsd = #{record.tgdbsd,jdbcType=DOUBLE},
@@ -196,7 +196,7 @@
   </update>
   <update id="updateByExampleWithBLOBs" parameterType="map">
     update jsjg
-    set albh = #{record.albh,jdbcType=VARCHAR},
+    set albh = #{record.albh,jdbcType=BIGINT},
       tgdbsd = #{record.tgdbsd,jdbcType=DOUBLE},
       tgwj = #{record.tgwj,jdbcType=DOUBLE},
       tgxsd = #{record.tgxsd,jdbcType=DOUBLE},
@@ -207,7 +207,7 @@
   </update>
   <update id="updateByExample" parameterType="map">
     update jsjg
-    set albh = #{record.albh,jdbcType=VARCHAR},
+    set albh = #{record.albh,jdbcType=BIGINT},
       tgdbsd = #{record.tgdbsd,jdbcType=DOUBLE},
       tgwj = #{record.tgwj,jdbcType=DOUBLE},
       tgxsd = #{record.tgxsd,jdbcType=DOUBLE}
@@ -231,7 +231,7 @@
         tgmc = #{tgmc,jdbcType=LONGVARCHAR},
       </if>
     </set>
-    where albh = #{albh,jdbcType=VARCHAR}
+    where albh = #{albh,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.lainey.wiki.domain.Jsjg">
     update jsjg
@@ -239,13 +239,13 @@
       tgwj = #{tgwj,jdbcType=DOUBLE},
       tgxsd = #{tgxsd,jdbcType=DOUBLE},
       tgmc = #{tgmc,jdbcType=LONGVARCHAR}
-    where albh = #{albh,jdbcType=VARCHAR}
+    where albh = #{albh,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.lainey.wiki.domain.Jsjg">
     update jsjg
     set tgdbsd = #{tgdbsd,jdbcType=DOUBLE},
       tgwj = #{tgwj,jdbcType=DOUBLE},
       tgxsd = #{tgxsd,jdbcType=DOUBLE}
-    where albh = #{albh,jdbcType=VARCHAR}
+    where albh = #{albh,jdbcType=BIGINT}
   </update>
 </mapper>

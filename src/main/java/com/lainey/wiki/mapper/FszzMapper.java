@@ -10,7 +10,7 @@ public interface FszzMapper {
 
     int deleteByExample(FszzExample example);
 
-    int deleteByPrimaryKey(String albh);
+    int deleteByPrimaryKey(Long albh);
 
     int insert(Fszz record);
 
@@ -20,7 +20,7 @@ public interface FszzMapper {
 
     List<Fszz> selectByExample(FszzExample example);
 
-    Fszz selectByPrimaryKey(String albh);
+    Fszz selectByPrimaryKey(Long albh);
 
     int updateByExampleSelective(@Param("record") Fszz record, @Param("example") FszzExample example);
 

@@ -1,7 +1,7 @@
 package com.lainey.wiki.domain;
 
 public class Jcsj {
-    private String albh;
+    private Long albh;
 
     private String bz;
 
@@ -15,11 +15,11 @@ public class Jcsj {
 
     private String dw;
 
-    public String getAlbh() {
+    public Long getAlbh() {
         return albh;
     }
 
-    public void setAlbh(String albh) {
+    public void setAlbh(Long albh) {
         this.albh = albh;
     }
 

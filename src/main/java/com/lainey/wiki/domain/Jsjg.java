@@ -1,7 +1,7 @@
 package com.lainey.wiki.domain;
 
 public class Jsjg {
-    private String albh;
+    private Long albh;
 
     private Double tgdbsd;
 
@@ -11,11 +11,11 @@ public class Jsjg {
 
     private String tgmc;
 
-    public String getAlbh() {
+    public Long getAlbh() {
         return albh;
     }
 
-    public void setAlbh(String albh) {
+    public void setAlbh(Long albh) {
         this.albh = albh;
     }
 

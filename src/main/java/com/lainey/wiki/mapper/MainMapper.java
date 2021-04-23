@@ -2,15 +2,16 @@ package com.lainey.wiki.mapper;
 
 import com.lainey.wiki.domain.Main;
 import com.lainey.wiki.domain.MainExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface MainMapper {
     long countByExample(MainExample example);
 
     int deleteByExample(MainExample example);
 
-    int deleteByPrimaryKey(String albh);
+    int deleteByPrimaryKey(Long albh);
 
     int insert(Main record);
 
@@ -20,7 +21,7 @@ public interface MainMapper {
 
     List<Main> selectByExample(MainExample example);
 
-    Main selectByPrimaryKey(String albh);
+    Main selectByPrimaryKey(Long albh);
 
     int updateByExampleSelective(@Param("record") Main record, @Param("example") MainExample example);
 

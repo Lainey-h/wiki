@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lainey.wiki.mapper.JcsjMapper">
   <resultMap id="BaseResultMap" type="com.lainey.wiki.domain.Jcsj">
-    <id column="albh" jdbcType="VARCHAR" property="albh" />
+    <id column="albh" jdbcType="BIGINT" property="albh" />
     <result column="bz" jdbcType="VARCHAR" property="bz" />
     <result column="qz" jdbcType="DOUBLE" property="qz" />
   </resultMap>
@@ -106,17 +106,17 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
     select 
     <include refid="Base_Column_List" />
     ,
     <include refid="Blob_Column_List" />
     from jcsj
-    where albh = #{albh,jdbcType=VARCHAR}
+    where albh = #{albh,jdbcType=BIGINT}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from jcsj
-    where albh = #{albh,jdbcType=VARCHAR}
+    where albh = #{albh,jdbcType=BIGINT}
   </delete>
   <delete id="deleteByExample" parameterType="com.lainey.wiki.domain.JcsjExample">
     delete from jcsj
@@ -125,12 +125,12 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.lainey.wiki.domain.Jcsj">
-    insert into jcsj (albh, bz, qz, 
-      sjlx, sjmx, sjz, 
-      dw)
-    values (#{albh,jdbcType=VARCHAR}, #{bz,jdbcType=VARCHAR}, #{qz,jdbcType=DOUBLE}, 
-      #{sjlx,jdbcType=LONGVARCHAR}, #{sjmx,jdbcType=LONGVARCHAR}, #{sjz,jdbcType=LONGVARCHAR}, 
-      #{dw,jdbcType=LONGVARCHAR})
+    insert into jcsj (albh, bz, qz, sjlx, 
+      sjmx, sjz, dw
+      )
+    values (#{albh,jdbcType=BIGINT}, #{bz,jdbcType=VARCHAR}, #{qz,jdbcType=DOUBLE}, #{sjlx,jdbcType=LONGVARCHAR}, 
+      #{sjmx,jdbcType=LONGVARCHAR}, #{sjz,jdbcType=LONGVARCHAR}, #{dw,jdbcType=LONGVARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.lainey.wiki.domain.Jcsj">
     insert into jcsj
@@ -159,7 +159,7 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="albh != null">
-        #{albh,jdbcType=VARCHAR},
+        #{albh,jdbcType=BIGINT},
       </if>
       <if test="bz != null">
         #{bz,jdbcType=VARCHAR},
@@ -191,7 +191,7 @@
     update jcsj
     <set>
       <if test="record.albh != null">
-        albh = #{record.albh,jdbcType=VARCHAR},
+        albh = #{record.albh,jdbcType=BIGINT},
       </if>
       <if test="record.bz != null">
         bz = #{record.bz,jdbcType=VARCHAR},
@@ -218,7 +218,7 @@
   </update>
   <update id="updateByExampleWithBLOBs" parameterType="map">
     update jcsj
-    set albh = #{record.albh,jdbcType=VARCHAR},
+    set albh = #{record.albh,jdbcType=BIGINT},
       bz = #{record.bz,jdbcType=VARCHAR},
       qz = #{record.qz,jdbcType=DOUBLE},
       sjlx = #{record.sjlx,jdbcType=LONGVARCHAR},
@@ -231,7 +231,7 @@
   </update>
   <update id="updateByExample" parameterType="map">
     update jcsj
-    set albh = #{record.albh,jdbcType=VARCHAR},
+    set albh = #{record.albh,jdbcType=BIGINT},
       bz = #{record.bz,jdbcType=VARCHAR},
       qz = #{record.qz,jdbcType=DOUBLE}
     <if test="_parameter != null">
@@ -260,7 +260,7 @@
         dw = #{dw,jdbcType=LONGVARCHAR},
       </if>
     </set>
-    where albh = #{albh,jdbcType=VARCHAR}
+    where albh = #{albh,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.lainey.wiki.domain.Jcsj">
     update jcsj
@@ -270,12 +270,12 @@
       sjmx = #{sjmx,jdbcType=LONGVARCHAR},
       sjz = #{sjz,jdbcType=LONGVARCHAR},
       dw = #{dw,jdbcType=LONGVARCHAR}
-    where albh = #{albh,jdbcType=VARCHAR}
+    where albh = #{albh,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.lainey.wiki.domain.Jcsj">
     update jcsj
     set bz = #{bz,jdbcType=VARCHAR},
       qz = #{qz,jdbcType=DOUBLE}
-    where albh = #{albh,jdbcType=VARCHAR}
+    where albh = #{albh,jdbcType=BIGINT}
   </update>
 </mapper>

@@ -3,7 +3,7 @@ package com.lainey.wiki.resp;
 import java.util.Date;
 
 public class MainQueryResp {
-    private String albh;
+    private Long albh;
 
     private String jh;
 
@@ -41,11 +41,11 @@ public class MainQueryResp {
 
     private String zjclyj;
 
-    public String getAlbh() {
+    public Long getAlbh() {
         return albh;
     }
 
-    public void setAlbh(String albh) {
+    public void setAlbh(Long albh) {
         this.albh = albh;
     }
 

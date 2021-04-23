@@ -3,7 +3,7 @@ package com.lainey.wiki.req;
 import java.util.Date;
 
 public class MainSaveReq {
-    private String albh;
+    private Long albh;
 
     private String jh;
 
@@ -41,11 +41,11 @@ public class MainSaveReq {
 
     private String zjclyj;
 
-    public String getAlbh() {
+    public Long getAlbh() {
         return albh;
     }
 
-    public void setAlbh(String albh) {
+    public void setAlbh(Long albh) {
         this.albh = albh;
     }
 

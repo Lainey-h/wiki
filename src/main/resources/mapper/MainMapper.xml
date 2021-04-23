@@ -2,27 +2,27 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lainey.wiki.mapper.MainMapper">
   <resultMap id="BaseResultMap" type="com.lainey.wiki.domain.Main">
-    <id column="ALBH" jdbcType="VARCHAR" property="albh" />
-    <result column="JH" jdbcType="VARCHAR" property="jh" />
-    <result column="YTMC" jdbcType="VARCHAR" property="ytmc" />
-    <result column="JX" jdbcType="VARCHAR" property="jx" />
-    <result column="JB" jdbcType="VARCHAR" property="jb" />
-    <result column="GK" jdbcType="VARCHAR" property="gk" />
-    <result column="ZS" jdbcType="DOUBLE" property="zs" />
-    <result column="ZZJS" jdbcType="DOUBLE" property="zzjs" />
-    <result column="ZYDC" jdbcType="VARCHAR" property="zydc" />
-    <result column="YX" jdbcType="VARCHAR" property="yx" />
-    <result column="SLLB" jdbcType="VARCHAR" property="sllb" />
-    <result column="SGLX" jdbcType="VARCHAR" property="sglx" />
-    <result column="SGFSSJ" jdbcType="DATE" property="sgfssj" />
-    <result column="SSSJ" jdbcType="DOUBLE" property="sssj" />
-    <result column="SLLY" jdbcType="VARCHAR" property="slly" />
-    <result column="BZ" jdbcType="VARCHAR" property="bz" />
+    <id column="albh" jdbcType="BIGINT" property="albh" />
+    <result column="jh" jdbcType="VARCHAR" property="jh" />
+    <result column="ytmc" jdbcType="VARCHAR" property="ytmc" />
+    <result column="jx" jdbcType="VARCHAR" property="jx" />
+    <result column="jb" jdbcType="VARCHAR" property="jb" />
+    <result column="gk" jdbcType="VARCHAR" property="gk" />
+    <result column="zs" jdbcType="DOUBLE" property="zs" />
+    <result column="zzjs" jdbcType="DOUBLE" property="zzjs" />
+    <result column="zydc" jdbcType="VARCHAR" property="zydc" />
+    <result column="yx" jdbcType="VARCHAR" property="yx" />
+    <result column="sllb" jdbcType="VARCHAR" property="sllb" />
+    <result column="sglx" jdbcType="VARCHAR" property="sglx" />
+    <result column="sgfssj" jdbcType="TIMESTAMP" property="sgfssj" />
+    <result column="sssj" jdbcType="DOUBLE" property="sssj" />
+    <result column="slly" jdbcType="VARCHAR" property="slly" />
+    <result column="bz" jdbcType="VARCHAR" property="bz" />
   </resultMap>
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.lainey.wiki.domain.Main">
-    <result column="SGFSMS" jdbcType="LONGVARCHAR" property="sgfsms" />
-    <result column="SGCLGC" jdbcType="LONGVARCHAR" property="sgclgc" />
-    <result column="ZJCLYJ" jdbcType="LONGVARCHAR" property="zjclyj" />
+    <result column="sgfsms" jdbcType="LONGVARCHAR" property="sgfsms" />
+    <result column="sgclms" jdbcType="LONGVARCHAR" property="sgclms" />
+    <result column="zjclyj" jdbcType="LONGVARCHAR" property="zjclyj" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -83,10 +83,10 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    ALBH, JH, YTMC, JX, JB, GK, ZS, ZZJS, ZYDC, YX, SLLB, SGLX, SGFSSJ, SSSJ, SLLY, BZ
+    albh, jh, ytmc, jx, jb, gk, zs, zzjs, zydc, yx, sllb, sglx, sgfssj, sssj, slly, bz
   </sql>
   <sql id="Blob_Column_List">
-    SGFSMS, SGCLGC, ZJCLYJ
+    sgfsms, sgclms, zjclyj
   </sql>
   <select id="selectByExampleWithBLOBs" parameterType="com.lainey.wiki.domain.MainExample" resultMap="ResultMapWithBLOBs">
     select
@@ -118,17 +118,17 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
     select 
     <include refid="Base_Column_List" />
     ,
     <include refid="Blob_Column_List" />
     from main
-    where ALBH = #{albh,jdbcType=VARCHAR}
+    where albh = #{albh,jdbcType=BIGINT}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from main
-    where ALBH = #{albh,jdbcType=VARCHAR}
+    where albh = #{albh,jdbcType=BIGINT}
   </delete>
   <delete id="deleteByExample" parameterType="com.lainey.wiki.domain.MainExample">
     delete from main
@@ -137,83 +137,83 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.lainey.wiki.domain.Main">
-    insert into main (ALBH, JH, YTMC, 
-      JX, JB, GK, ZS, 
-      ZZJS, ZYDC, YX, SLLB, 
-      SGLX, SGFSSJ, SSSJ, SLLY, 
-      BZ, SGFSMS, SGCLGC, 
-      ZJCLYJ)
-    values (#{albh,jdbcType=VARCHAR}, #{jh,jdbcType=VARCHAR}, #{ytmc,jdbcType=VARCHAR}, 
+    insert into main (albh, jh, ytmc, 
+      jx, jb, gk, zs, 
+      zzjs, zydc, yx, sllb, 
+      sglx, sgfssj, sssj, 
+      slly, bz, sgfsms, 
+      sgclms, zjclyj)
+    values (#{albh,jdbcType=BIGINT}, #{jh,jdbcType=VARCHAR}, #{ytmc,jdbcType=VARCHAR}, 
       #{jx,jdbcType=VARCHAR}, #{jb,jdbcType=VARCHAR}, #{gk,jdbcType=VARCHAR}, #{zs,jdbcType=DOUBLE}, 
       #{zzjs,jdbcType=DOUBLE}, #{zydc,jdbcType=VARCHAR}, #{yx,jdbcType=VARCHAR}, #{sllb,jdbcType=VARCHAR}, 
-      #{sglx,jdbcType=VARCHAR}, #{sgfssj,jdbcType=DATE}, #{sssj,jdbcType=DOUBLE}, #{slly,jdbcType=VARCHAR}, 
-      #{bz,jdbcType=VARCHAR}, #{sgfsms,jdbcType=LONGVARCHAR}, #{sgclgc,jdbcType=LONGVARCHAR}, 
-      #{zjclyj,jdbcType=LONGVARCHAR})
+      #{sglx,jdbcType=VARCHAR}, #{sgfssj,jdbcType=TIMESTAMP}, #{sssj,jdbcType=DOUBLE}, 
+      #{slly,jdbcType=VARCHAR}, #{bz,jdbcType=VARCHAR}, #{sgfsms,jdbcType=LONGVARCHAR}, 
+      #{sgclms,jdbcType=LONGVARCHAR}, #{zjclyj,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.lainey.wiki.domain.Main">
     insert into main
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="albh != null">
-        ALBH,
+        albh,
       </if>
       <if test="jh != null">
-        JH,
+        jh,
       </if>
       <if test="ytmc != null">
-        YTMC,
+        ytmc,
       </if>
       <if test="jx != null">
-        JX,
+        jx,
       </if>
       <if test="jb != null">
-        JB,
+        jb,
       </if>
       <if test="gk != null">
-        GK,
+        gk,
       </if>
       <if test="zs != null">
-        ZS,
+        zs,
       </if>
       <if test="zzjs != null">
-        ZZJS,
+        zzjs,
       </if>
       <if test="zydc != null">
-        ZYDC,
+        zydc,
       </if>
       <if test="yx != null">
-        YX,
+        yx,
       </if>
       <if test="sllb != null">
-        SLLB,
+        sllb,
       </if>
       <if test="sglx != null">
-        SGLX,
+        sglx,
       </if>
       <if test="sgfssj != null">
-        SGFSSJ,
+        sgfssj,
       </if>
       <if test="sssj != null">
-        SSSJ,
+        sssj,
       </if>
       <if test="slly != null">
-        SLLY,
+        slly,
       </if>
       <if test="bz != null">
-        BZ,
+        bz,
       </if>
       <if test="sgfsms != null">
-        SGFSMS,
+        sgfsms,
       </if>
-      <if test="sgclgc != null">
-        SGCLGC,
+      <if test="sgclms != null">
+        sgclms,
       </if>
       <if test="zjclyj != null">
-        ZJCLYJ,
+        zjclyj,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="albh != null">
-        #{albh,jdbcType=VARCHAR},
+        #{albh,jdbcType=BIGINT},
       </if>
       <if test="jh != null">
         #{jh,jdbcType=VARCHAR},
@@ -249,7 +249,7 @@
         #{sglx,jdbcType=VARCHAR},
       </if>
       <if test="sgfssj != null">
-        #{sgfssj,jdbcType=DATE},
+        #{sgfssj,jdbcType=TIMESTAMP},
       </if>
       <if test="sssj != null">
         #{sssj,jdbcType=DOUBLE},
@@ -263,8 +263,8 @@
       <if test="sgfsms != null">
         #{sgfsms,jdbcType=LONGVARCHAR},
       </if>
-      <if test="sgclgc != null">
-        #{sgclgc,jdbcType=LONGVARCHAR},
+      <if test="sgclms != null">
+        #{sgclms,jdbcType=LONGVARCHAR},
       </if>
       <if test="zjclyj != null">
         #{zjclyj,jdbcType=LONGVARCHAR},
@@ -281,61 +281,61 @@
     update main
     <set>
       <if test="record.albh != null">
-        ALBH = #{record.albh,jdbcType=VARCHAR},
+        albh = #{record.albh,jdbcType=BIGINT},
       </if>
       <if test="record.jh != null">
-        JH = #{record.jh,jdbcType=VARCHAR},
+        jh = #{record.jh,jdbcType=VARCHAR},
       </if>
       <if test="record.ytmc != null">
-        YTMC = #{record.ytmc,jdbcType=VARCHAR},
+        ytmc = #{record.ytmc,jdbcType=VARCHAR},
       </if>
       <if test="record.jx != null">
-        JX = #{record.jx,jdbcType=VARCHAR},
+        jx = #{record.jx,jdbcType=VARCHAR},
       </if>
       <if test="record.jb != null">
-        JB = #{record.jb,jdbcType=VARCHAR},
+        jb = #{record.jb,jdbcType=VARCHAR},
       </if>
       <if test="record.gk != null">
-        GK = #{record.gk,jdbcType=VARCHAR},
+        gk = #{record.gk,jdbcType=VARCHAR},
       </if>
       <if test="record.zs != null">
-        ZS = #{record.zs,jdbcType=DOUBLE},
+        zs = #{record.zs,jdbcType=DOUBLE},
       </if>
       <if test="record.zzjs != null">
-        ZZJS = #{record.zzjs,jdbcType=DOUBLE},
+        zzjs = #{record.zzjs,jdbcType=DOUBLE},
       </if>
       <if test="record.zydc != null">
-        ZYDC = #{record.zydc,jdbcType=VARCHAR},
+        zydc = #{record.zydc,jdbcType=VARCHAR},
       </if>
       <if test="record.yx != null">
-        YX = #{record.yx,jdbcType=VARCHAR},
+        yx = #{record.yx,jdbcType=VARCHAR},
       </if>
       <if test="record.sllb != null">
-        SLLB = #{record.sllb,jdbcType=VARCHAR},
+        sllb = #{record.sllb,jdbcType=VARCHAR},
       </if>
       <if test="record.sglx != null">
-        SGLX = #{record.sglx,jdbcType=VARCHAR},
+        sglx = #{record.sglx,jdbcType=VARCHAR},
       </if>
       <if test="record.sgfssj != null">
-        SGFSSJ = #{record.sgfssj,jdbcType=DATE},
+        sgfssj = #{record.sgfssj,jdbcType=TIMESTAMP},
       </if>
       <if test="record.sssj != null">
-        SSSJ = #{record.sssj,jdbcType=DOUBLE},
+        sssj = #{record.sssj,jdbcType=DOUBLE},
       </if>
       <if test="record.slly != null">
-        SLLY = #{record.slly,jdbcType=VARCHAR},
+        slly = #{record.slly,jdbcType=VARCHAR},
       </if>
       <if test="record.bz != null">
-        BZ = #{record.bz,jdbcType=VARCHAR},
+        bz = #{record.bz,jdbcType=VARCHAR},
       </if>
       <if test="record.sgfsms != null">
-        SGFSMS = #{record.sgfsms,jdbcType=LONGVARCHAR},
+        sgfsms = #{record.sgfsms,jdbcType=LONGVARCHAR},
       </if>
-      <if test="record.sgclgc != null">
-        SGCLGC = #{record.sgclgc,jdbcType=LONGVARCHAR},
+      <if test="record.sgclms != null">
+        sgclms = #{record.sgclms,jdbcType=LONGVARCHAR},
       </if>
       <if test="record.zjclyj != null">
-        ZJCLYJ = #{record.zjclyj,jdbcType=LONGVARCHAR},
+        zjclyj = #{record.zjclyj,jdbcType=LONGVARCHAR},
       </if>
     </set>
     <if test="_parameter != null">
@@ -344,47 +344,47 @@
   </update>
   <update id="updateByExampleWithBLOBs" parameterType="map">
     update main
-    set ALBH = #{record.albh,jdbcType=VARCHAR},
-      JH = #{record.jh,jdbcType=VARCHAR},
-      YTMC = #{record.ytmc,jdbcType=VARCHAR},
-      JX = #{record.jx,jdbcType=VARCHAR},
-      JB = #{record.jb,jdbcType=VARCHAR},
-      GK = #{record.gk,jdbcType=VARCHAR},
-      ZS = #{record.zs,jdbcType=DOUBLE},
-      ZZJS = #{record.zzjs,jdbcType=DOUBLE},
-      ZYDC = #{record.zydc,jdbcType=VARCHAR},
-      YX = #{record.yx,jdbcType=VARCHAR},
-      SLLB = #{record.sllb,jdbcType=VARCHAR},
-      SGLX = #{record.sglx,jdbcType=VARCHAR},
-      SGFSSJ = #{record.sgfssj,jdbcType=DATE},
-      SSSJ = #{record.sssj,jdbcType=DOUBLE},
-      SLLY = #{record.slly,jdbcType=VARCHAR},
-      BZ = #{record.bz,jdbcType=VARCHAR},
-      SGFSMS = #{record.sgfsms,jdbcType=LONGVARCHAR},
-      SGCLGC = #{record.sgclgc,jdbcType=LONGVARCHAR},
-      ZJCLYJ = #{record.zjclyj,jdbcType=LONGVARCHAR}
+    set albh = #{record.albh,jdbcType=BIGINT},
+      jh = #{record.jh,jdbcType=VARCHAR},
+      ytmc = #{record.ytmc,jdbcType=VARCHAR},
+      jx = #{record.jx,jdbcType=VARCHAR},
+      jb = #{record.jb,jdbcType=VARCHAR},
+      gk = #{record.gk,jdbcType=VARCHAR},
+      zs = #{record.zs,jdbcType=DOUBLE},
+      zzjs = #{record.zzjs,jdbcType=DOUBLE},
+      zydc = #{record.zydc,jdbcType=VARCHAR},
+      yx = #{record.yx,jdbcType=VARCHAR},
+      sllb = #{record.sllb,jdbcType=VARCHAR},
+      sglx = #{record.sglx,jdbcType=VARCHAR},
+      sgfssj = #{record.sgfssj,jdbcType=TIMESTAMP},
+      sssj = #{record.sssj,jdbcType=DOUBLE},
+      slly = #{record.slly,jdbcType=VARCHAR},
+      bz = #{record.bz,jdbcType=VARCHAR},
+      sgfsms = #{record.sgfsms,jdbcType=LONGVARCHAR},
+      sgclms = #{record.sgclms,jdbcType=LONGVARCHAR},
+      zjclyj = #{record.zjclyj,jdbcType=LONGVARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
     update main
-    set ALBH = #{record.albh,jdbcType=VARCHAR},
-      JH = #{record.jh,jdbcType=VARCHAR},
-      YTMC = #{record.ytmc,jdbcType=VARCHAR},
-      JX = #{record.jx,jdbcType=VARCHAR},
-      JB = #{record.jb,jdbcType=VARCHAR},
-      GK = #{record.gk,jdbcType=VARCHAR},
-      ZS = #{record.zs,jdbcType=DOUBLE},
-      ZZJS = #{record.zzjs,jdbcType=DOUBLE},
-      ZYDC = #{record.zydc,jdbcType=VARCHAR},
-      YX = #{record.yx,jdbcType=VARCHAR},
-      SLLB = #{record.sllb,jdbcType=VARCHAR},
-      SGLX = #{record.sglx,jdbcType=VARCHAR},
-      SGFSSJ = #{record.sgfssj,jdbcType=DATE},
-      SSSJ = #{record.sssj,jdbcType=DOUBLE},
-      SLLY = #{record.slly,jdbcType=VARCHAR},
-      BZ = #{record.bz,jdbcType=VARCHAR}
+    set albh = #{record.albh,jdbcType=BIGINT},
+      jh = #{record.jh,jdbcType=VARCHAR},
+      ytmc = #{record.ytmc,jdbcType=VARCHAR},
+      jx = #{record.jx,jdbcType=VARCHAR},
+      jb = #{record.jb,jdbcType=VARCHAR},
+      gk = #{record.gk,jdbcType=VARCHAR},
+      zs = #{record.zs,jdbcType=DOUBLE},
+      zzjs = #{record.zzjs,jdbcType=DOUBLE},
+      zydc = #{record.zydc,jdbcType=VARCHAR},
+      yx = #{record.yx,jdbcType=VARCHAR},
+      sllb = #{record.sllb,jdbcType=VARCHAR},
+      sglx = #{record.sglx,jdbcType=VARCHAR},
+      sgfssj = #{record.sgfssj,jdbcType=TIMESTAMP},
+      sssj = #{record.sssj,jdbcType=DOUBLE},
+      slly = #{record.slly,jdbcType=VARCHAR},
+      bz = #{record.bz,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -393,101 +393,101 @@
     update main
     <set>
       <if test="jh != null">
-        JH = #{jh,jdbcType=VARCHAR},
+        jh = #{jh,jdbcType=VARCHAR},
       </if>
       <if test="ytmc != null">
-        YTMC = #{ytmc,jdbcType=VARCHAR},
+        ytmc = #{ytmc,jdbcType=VARCHAR},
       </if>
       <if test="jx != null">
-        JX = #{jx,jdbcType=VARCHAR},
+        jx = #{jx,jdbcType=VARCHAR},
       </if>
       <if test="jb != null">
-        JB = #{jb,jdbcType=VARCHAR},
+        jb = #{jb,jdbcType=VARCHAR},
       </if>
       <if test="gk != null">
-        GK = #{gk,jdbcType=VARCHAR},
+        gk = #{gk,jdbcType=VARCHAR},
       </if>
       <if test="zs != null">
-        ZS = #{zs,jdbcType=DOUBLE},
+        zs = #{zs,jdbcType=DOUBLE},
       </if>
       <if test="zzjs != null">
-        ZZJS = #{zzjs,jdbcType=DOUBLE},
+        zzjs = #{zzjs,jdbcType=DOUBLE},
       </if>
       <if test="zydc != null">
-        ZYDC = #{zydc,jdbcType=VARCHAR},
+        zydc = #{zydc,jdbcType=VARCHAR},
       </if>
       <if test="yx != null">
-        YX = #{yx,jdbcType=VARCHAR},
+        yx = #{yx,jdbcType=VARCHAR},
       </if>
       <if test="sllb != null">
-        SLLB = #{sllb,jdbcType=VARCHAR},
+        sllb = #{sllb,jdbcType=VARCHAR},
       </if>
       <if test="sglx != null">
-        SGLX = #{sglx,jdbcType=VARCHAR},
+        sglx = #{sglx,jdbcType=VARCHAR},
       </if>
       <if test="sgfssj != null">
-        SGFSSJ = #{sgfssj,jdbcType=DATE},
+        sgfssj = #{sgfssj,jdbcType=TIMESTAMP},
       </if>
       <if test="sssj != null">
-        SSSJ = #{sssj,jdbcType=DOUBLE},
+        sssj = #{sssj,jdbcType=DOUBLE},
       </if>
       <if test="slly != null">
-        SLLY = #{slly,jdbcType=VARCHAR},
+        slly = #{slly,jdbcType=VARCHAR},
       </if>
       <if test="bz != null">
-        BZ = #{bz,jdbcType=VARCHAR},
+        bz = #{bz,jdbcType=VARCHAR},
       </if>
       <if test="sgfsms != null">
-        SGFSMS = #{sgfsms,jdbcType=LONGVARCHAR},
+        sgfsms = #{sgfsms,jdbcType=LONGVARCHAR},
       </if>
-      <if test="sgclgc != null">
-        SGCLGC = #{sgclgc,jdbcType=LONGVARCHAR},
+      <if test="sgclms != null">
+        sgclms = #{sgclms,jdbcType=LONGVARCHAR},
       </if>
       <if test="zjclyj != null">
-        ZJCLYJ = #{zjclyj,jdbcType=LONGVARCHAR},
+        zjclyj = #{zjclyj,jdbcType=LONGVARCHAR},
       </if>
     </set>
-    where ALBH = #{albh,jdbcType=VARCHAR}
+    where albh = #{albh,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.lainey.wiki.domain.Main">
     update main
-    set JH = #{jh,jdbcType=VARCHAR},
-      YTMC = #{ytmc,jdbcType=VARCHAR},
-      JX = #{jx,jdbcType=VARCHAR},
-      JB = #{jb,jdbcType=VARCHAR},
-      GK = #{gk,jdbcType=VARCHAR},
-      ZS = #{zs,jdbcType=DOUBLE},
-      ZZJS = #{zzjs,jdbcType=DOUBLE},
-      ZYDC = #{zydc,jdbcType=VARCHAR},
-      YX = #{yx,jdbcType=VARCHAR},
-      SLLB = #{sllb,jdbcType=VARCHAR},
-      SGLX = #{sglx,jdbcType=VARCHAR},
-      SGFSSJ = #{sgfssj,jdbcType=DATE},
-      SSSJ = #{sssj,jdbcType=DOUBLE},
-      SLLY = #{slly,jdbcType=VARCHAR},
-      BZ = #{bz,jdbcType=VARCHAR},
-      SGFSMS = #{sgfsms,jdbcType=LONGVARCHAR},
-      SGCLGC = #{sgclgc,jdbcType=LONGVARCHAR},
-      ZJCLYJ = #{zjclyj,jdbcType=LONGVARCHAR}
-    where ALBH = #{albh,jdbcType=VARCHAR}
+    set jh = #{jh,jdbcType=VARCHAR},
+      ytmc = #{ytmc,jdbcType=VARCHAR},
+      jx = #{jx,jdbcType=VARCHAR},
+      jb = #{jb,jdbcType=VARCHAR},
+      gk = #{gk,jdbcType=VARCHAR},
+      zs = #{zs,jdbcType=DOUBLE},
+      zzjs = #{zzjs,jdbcType=DOUBLE},
+      zydc = #{zydc,jdbcType=VARCHAR},
+      yx = #{yx,jdbcType=VARCHAR},
+      sllb = #{sllb,jdbcType=VARCHAR},
+      sglx = #{sglx,jdbcType=VARCHAR},
+      sgfssj = #{sgfssj,jdbcType=TIMESTAMP},
+      sssj = #{sssj,jdbcType=DOUBLE},
+      slly = #{slly,jdbcType=VARCHAR},
+      bz = #{bz,jdbcType=VARCHAR},
+      sgfsms = #{sgfsms,jdbcType=LONGVARCHAR},
+      sgclms = #{sgclms,jdbcType=LONGVARCHAR},
+      zjclyj = #{zjclyj,jdbcType=LONGVARCHAR}
+    where albh = #{albh,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.lainey.wiki.domain.Main">
     update main
-    set JH = #{jh,jdbcType=VARCHAR},
-      YTMC = #{ytmc,jdbcType=VARCHAR},
-      JX = #{jx,jdbcType=VARCHAR},
-      JB = #{jb,jdbcType=VARCHAR},
-      GK = #{gk,jdbcType=VARCHAR},
-      ZS = #{zs,jdbcType=DOUBLE},
-      ZZJS = #{zzjs,jdbcType=DOUBLE},
-      ZYDC = #{zydc,jdbcType=VARCHAR},
-      YX = #{yx,jdbcType=VARCHAR},
-      SLLB = #{sllb,jdbcType=VARCHAR},
-      SGLX = #{sglx,jdbcType=VARCHAR},
-      SGFSSJ = #{sgfssj,jdbcType=DATE},
-      SSSJ = #{sssj,jdbcType=DOUBLE},
-      SLLY = #{slly,jdbcType=VARCHAR},
-      BZ = #{bz,jdbcType=VARCHAR}
-    where ALBH = #{albh,jdbcType=VARCHAR}
+    set jh = #{jh,jdbcType=VARCHAR},
+      ytmc = #{ytmc,jdbcType=VARCHAR},
+      jx = #{jx,jdbcType=VARCHAR},
+      jb = #{jb,jdbcType=VARCHAR},
+      gk = #{gk,jdbcType=VARCHAR},
+      zs = #{zs,jdbcType=DOUBLE},
+      zzjs = #{zzjs,jdbcType=DOUBLE},
+      zydc = #{zydc,jdbcType=VARCHAR},
+      yx = #{yx,jdbcType=VARCHAR},
+      sllb = #{sllb,jdbcType=VARCHAR},
+      sglx = #{sglx,jdbcType=VARCHAR},
+      sgfssj = #{sgfssj,jdbcType=TIMESTAMP},
+      sssj = #{sssj,jdbcType=DOUBLE},
+      slly = #{slly,jdbcType=VARCHAR},
+      bz = #{bz,jdbcType=VARCHAR}
+    where albh = #{albh,jdbcType=BIGINT}
   </update>
 </mapper>

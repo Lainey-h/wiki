@@ -1,7 +1,7 @@
 package com.lainey.wiki.domain;
 
 public class Fszz {
-    private String albh;
+    private Long albh;
 
     private Double qz;
 
@@ -21,11 +21,11 @@ public class Fszz {
 
     private String sxlb;
 
-    public String getAlbh() {
+    public Long getAlbh() {
         return albh;
     }
 
-    public void setAlbh(String albh) {
+    public void setAlbh(Long albh) {
         this.albh = albh;
     }
 
