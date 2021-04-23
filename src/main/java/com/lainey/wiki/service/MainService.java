@@ -6,7 +6,8 @@ import com.lainey.wiki.domain.Main;
 import com.lainey.wiki.domain.MainExample;
 import com.lainey.wiki.mapper.MainMapper;
 import com.lainey.wiki.req.MainReq;
-import com.lainey.wiki.resp.MainResp;
+import com.lainey.wiki.req.MainSaveReq;
+import com.lainey.wiki.resp.MainQueryResp;
 import com.lainey.wiki.resp.PageResp;
 import com.lainey.wiki.util.CopyUtil;
 import org.slf4j.Logger;
@@ -25,7 +26,7 @@ public class MainService {
     @Resource
     private MainMapper mainMapper;
 
-    public PageResp<MainResp> list(MainReq req){
+    public PageResp<MainQueryResp> list(MainReq req){
         MainExample mainExample = new MainExample();
         MainExample.Criteria criteria=mainExample.createCriteria();
         if (!ObjectUtils.isEmpty(req.getAlbh())){
@@ -48,12 +49,27 @@ public class MainService {
         }*/
 
         // 列表复制
-        List<MainResp> list = CopyUtil.copyList(mainList, MainResp.class);
+        List<MainQueryResp> list = CopyUtil.copyList(mainList, MainQueryResp.class);
 
-        PageResp<MainResp> pageResp = new PageResp<>();
+        PageResp<MainQueryResp> pageResp = new PageResp<>();
         pageResp.setTotal(pageInfo.getTotal());
         pageResp.setList(list);
 
         return pageResp ;
+    }
+
+    /**
+     * 保存
+     * @param req
+     */
+    public void save(MainSaveReq req) {
+        Main main = CopyUtil.copy(req, Main.class);
+        if (ObjectUtils.isEmpty(req.getAlbh())) {
+            // 新增
+            mainMapper.insert(main);
+        } else {
+            // 更新
+            mainMapper.updateByPrimaryKey(main);
+        }
     }
 }

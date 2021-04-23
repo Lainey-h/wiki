@@ -1,13 +1,12 @@
 package com.lainey.wiki.controller;
 
 import com.lainey.wiki.req.MainReq;
+import com.lainey.wiki.req.MainSaveReq;
 import com.lainey.wiki.resp.CommonResp;
-import com.lainey.wiki.resp.MainResp;
+import com.lainey.wiki.resp.MainQueryResp;
 import com.lainey.wiki.resp.PageResp;
 import com.lainey.wiki.service.MainService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
@@ -25,9 +24,16 @@ public class MainController {
     @GetMapping("/list")//接口
 
     public CommonResp list(MainReq req){
-        CommonResp<PageResp<MainResp>> resp = new CommonResp<>();
-        PageResp<MainResp> list =mainService.list(req);
+        CommonResp<PageResp<MainQueryResp>> resp = new CommonResp<>();
+        PageResp<MainQueryResp> list =mainService.list(req);
         resp.setContent(list);
+        return resp;
+    }
+
+    @PostMapping("/save")
+    public CommonResp save(@RequestBody MainSaveReq req){
+        CommonResp resp = new CommonResp<>();
+        mainService.save(req);
         return resp;
     }
 }

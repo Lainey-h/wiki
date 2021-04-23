@@ -1,6 +1,6 @@
 package com.lainey.wiki.controller;
 
-import com.lainey.wiki.req.EbookReq;
+import com.lainey.wiki.req.EbookQueryReq;
 import com.lainey.wiki.resp.CommonResp;
 import com.lainey.wiki.resp.EbookResp;
 import com.lainey.wiki.service.EbookService;
@@ -21,7 +21,7 @@ public class EbookController {
     private EbookService ebookService;
 
     @GetMapping("/list")//接口
-    public CommonResp list(EbookReq req){
+    public CommonResp list(EbookQueryReq req){
         CommonResp<List<EbookResp>> resp = new CommonResp<>();
         List<EbookResp> list =ebookService.list(req);
         resp.setContent(list);

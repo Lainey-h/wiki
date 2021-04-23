@@ -2,7 +2,7 @@ package com.lainey.wiki.resp;
 
 import java.util.Date;
 
-public class MainResp {
+public class MainQueryResp {
     private String albh;
 
     private String jh;

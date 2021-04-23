@@ -3,7 +3,7 @@ package com.lainey.wiki.service;
 import com.lainey.wiki.domain.Ebook;
 import com.lainey.wiki.domain.EbookExample;
 import com.lainey.wiki.mapper.EbookMapper;
-import com.lainey.wiki.req.EbookReq;
+import com.lainey.wiki.req.EbookQueryReq;
 import com.lainey.wiki.resp.EbookResp;
 import com.lainey.wiki.util.CopyUtil;
 import org.springframework.stereotype.Service;
@@ -18,7 +18,7 @@ public class EbookService {
     @Resource
     private EbookMapper ebookMapper;
 
-    public List<EbookResp> list(EbookReq req){
+    public List<EbookResp> list(EbookQueryReq req){
         EbookExample ebookExample = new EbookExample();
         EbookExample.Criteria criteria = ebookExample.createCriteria();
         if(!ObjectUtils.isEmpty(req.getName())){
