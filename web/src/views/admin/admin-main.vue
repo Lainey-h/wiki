@@ -13,11 +13,11 @@
           @change="handleTableChange"
       >
         <template #action="{ text, record}" >
-          <a-space size="small">
+          <a-space size="small" direction="vertical">
             <a-button type="primary" size="small">
               文档管理
             </a-button>
-            <a-button type="primary" size="small" @click="edit()">
+            <a-button type="primary" size="small" @click="edit(record)">
               编辑
             </a-button>
           </a-space>
@@ -81,7 +81,35 @@
     :confirm-loading="modalLoading"
     @ok="handleModalOk"
     >
-    <p>test</p>
+    <a-form :model="main" :label-col="{ span: 6 }" :wrapper-col="{ span: 18 }">
+      <a-form-item label="井号">
+        <a-input v-model:value="main.jh" />
+      </a-form-item>
+      <a-form-item label="油田名称">
+        <a-input v-model:value="main.ytmc" />
+      </a-form-item>
+      <a-form-item label="井型">
+        <a-input v-model:value="main.jx" />
+      </a-form-item>
+      <a-form-item label="事故类型">
+        <a-input v-model:value="main.sglx" type="textarea" />
+      </a-form-item>
+      <a-form-item label="钻遇地层">
+        <a-input v-model:value="main.zydc" />
+      </a-form-item>
+      <a-form-item label="事故发生起始井深">
+        <a-input v-model:value="main.zs" />
+      </a-form-item>
+      <a-form-item label="事故发生终止井深">
+        <a-input v-model:value="main.zzjs" />
+      </a-form-item>
+      <a-form-item label="事故发生时间">
+        <a-date-picker show-time placeholder="Select Time" @change="onTimeChange" @ok="onTimeOk" v-model:value="main.sgfssj"/>
+      </a-form-item>
+      <a-form-item label="损失时间">
+        <a-input v-model:value="main.sssj" />
+      </a-form-item>
+    </a-form>
   </a-modal>
 </template>
 
@@ -93,6 +121,7 @@ import data = _default.data;
 // import _default from "ant-design-vue/es/color-picker";// default重名 注释掉了
 // import size = _default.props.size;
 // import { SearchOutlined } from '@ant-design/icons-vue';
+import { Moment } from 'moment';
 
 export default defineComponent({
   name: 'Home',
@@ -271,25 +300,6 @@ export default defineComponent({
         },
       },
       {
-        title: '损失时间',
-        dataIndex: 'sssj',
-        slots: {
-          filterDropdown: 'filterDropdown',
-          filterIcon: 'filterIcon',
-          customRender: 'customRender',
-        },
-        onFilter: (value: any, record: any) =>
-            record.sssj.toString().toLowerCase().includes(value.toLowerCase()),
-        onFilterDropdownVisibleChange: (visible: any) => {
-          if (visible) {
-            setTimeout(() => {
-              console.log(searchInput.value);
-              searchInput.value.focus();
-            }, 0);
-          }
-        },
-      },
-      {
         title: '事故发生时间',
         dataIndex: 'sgfssj',
         slots: {
@@ -308,6 +318,26 @@ export default defineComponent({
           }
         },
       },
+      {
+        title: '损失时间',
+        dataIndex: 'sssj',
+        slots: {
+          filterDropdown: 'filterDropdown',
+          filterIcon: 'filterIcon',
+          customRender: 'customRender',
+        },
+        onFilter: (value: any, record: any) =>
+            record.sssj.toString().toLowerCase().includes(value.toLowerCase()),
+        onFilterDropdownVisibleChange: (visible: any) => {
+          if (visible) {
+            setTimeout(() => {
+              console.log(searchInput.value);
+              searchInput.value.focus();
+            }, 0);
+          }
+        },
+      },
+
       {
         title: 'Action',
         key: 'operation',
@@ -368,9 +398,20 @@ export default defineComponent({
     /**
      * 编辑
      */
-    const edit = () => {
+    const edit = (record: any) => {
       modalVisible.value = true;
+      main.value = record
     };
+    const onTimeChange = (value: Moment[], dateString: string[]) => {
+      console.log('Selected Time: ', value);
+      console.log('Formatted Selected Time: ', dateString);
+    };
+
+    const onTimeOk = (value: Moment[]) => {
+      console.log('onOk: ', value);
+    };
+
+
 
     onMounted(() => {
       console.log("onMounted222");
@@ -405,9 +446,12 @@ export default defineComponent({
 
       edit,
 
+      main,
       modalVisible,
       modalLoading,
-      handleModalOk
+      handleModalOk,
+      onTimeChange,
+      onTimeOk,
     }
   }
 });
