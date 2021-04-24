@@ -135,6 +135,7 @@ import data = _default.data;
 // import size = _default.props.size;
 // import { SearchOutlined } from '@ant-design/icons-vue';
 import { Moment } from 'moment';
+import { message } from "ant-design-vue";
 
 export default defineComponent({
   name: 'AdminMain',
@@ -146,7 +147,7 @@ export default defineComponent({
     const mains=ref();
     const  pagination = ref({
       current: 1,
-      pageSize: 8,
+      pageSize: 1001,
       total: 0
     });
     const loading = ref(false);
@@ -383,10 +384,14 @@ export default defineComponent({
 
         loading.value = false;
         const data = response.data;
-        mains.value = data.content.list;
-        // 重置分页按钮
-        pagination.value.current = params.page;
-        pagination.value.total = data.content.total;
+        if (data.success){
+          mains.value = data.content.list;
+          // 重置分页按钮
+          pagination.value.current = params.page;
+          pagination.value.total = data.content.total;
+        }else {
+          message.error(data.message);
+        }
       })
     }
 

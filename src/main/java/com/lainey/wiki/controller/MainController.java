@@ -9,6 +9,7 @@ import com.lainey.wiki.service.MainService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.validation.Valid;
 
 @RestController// RestContraller用来返回字符串
 //@Controller//用来返回页面 表示访问地址("/hello")的时候要返回一个页面
@@ -23,7 +24,7 @@ public class MainController {
 
     @GetMapping("/list")//接口
 
-    public CommonResp list(MainQueryReq req){
+    public CommonResp list(@Valid MainQueryReq req){
         CommonResp<PageResp<MainQueryResp>> resp = new CommonResp<>();
         PageResp<MainQueryResp> list =mainService.list(req);
         resp.setContent(list);
