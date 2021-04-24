@@ -17,14 +17,22 @@
           :scroll="{x: 1500, y: 1000}"
           @change="handleTableChange"
       >
-        <template #action="{ text, record}" >
+        <template v-slot:action="{ text, record}" >
           <a-space size="small" direction="vertical">
-            <a-button type="primary" size="small">
-              文档管理
-            </a-button>
             <a-button type="primary" size="small" @click="edit(record)">
               编辑
             </a-button>
+            <a-popconfirm
+                title="删除后不可恢复，确认删除?"
+                ok-text="是"
+                cancel-text="否"
+                @confirm="handleDelete(record.albh)"
+            >
+              <a-button type="danger">
+                删除
+              </a-button>
+            </a-popconfirm>
+
           </a-space>
         </template>
         <template #filterDropdown="{ setSelectedKeys, selectedKeys, confirm, clearFilters, column }">
@@ -129,8 +137,7 @@ import data = _default.data;
 import { Moment } from 'moment';
 
 export default defineComponent({
-  name: 'Home',
-
+  name: 'AdminMain',
   setup: function () {
     // const ebooks = ref();// 响应式数据
     // const ebooks1=reactive({books:[]})
@@ -141,7 +148,7 @@ export default defineComponent({
       current: 1,
       pageSize: 8,
       total: 0
-    });1
+    });
     const loading = ref(false);
 
     const state = reactive({
@@ -345,7 +352,7 @@ export default defineComponent({
 
       {
         title: 'Action',
-        key: 'operation',
+        key: 'action',
         fixed: 'right',
         width: 150,
         slots: { customRender: 'action' },
@@ -365,10 +372,12 @@ export default defineComponent({
 
     const handleQuery = (params: any) => {
       loading.value=true;
+      // 如果不清空现有数据，则编辑保存重新加载数据后，再点编辑，则列表显示的还是编辑前的数据
+      mains.value = [];
       axios.get("/main/list",{
         params:{
           page: params.page,
-          size: params.size
+          size: params.size,
         }
       }).then((response) => {
 
@@ -396,10 +405,10 @@ export default defineComponent({
     const handleModalOk = () => {
       modalLoading.value = true;
       axios.post("/main/save", main.value).then((response) => {
+        modalLoading.value = false;
         const data = response.data; // data = commonResp
         if (data.success) {
           modalVisible.value = false;
-          modalLoading.value = false;
           // 重新加载列表
           handleQuery({
             page: pagination.value.current,
@@ -420,7 +429,20 @@ export default defineComponent({
      */
     const add= () => {
       modalVisible.value = true;
-      main.value = {}
+      main.value = {};
+    };
+
+    const handleDelete =(albh: number) => {
+      axios.delete("/main/delete/" + albh).then((response) => {
+        const data = response.data; // data = commonResp
+        if (data.success) {
+          // 重新加载列表
+          handleQuery({
+            page: pagination.value.current,
+            size: pagination.value.pageSize,
+          });
+        }
+      });
     };
 
 
@@ -454,20 +476,23 @@ export default defineComponent({
     return {
       // ebooks// html代码要拿到响应式变量，需要在setup最后return
       // ebooks2:toRef(ebooks1,"books"),
+      param,
       mains,
+      pagination,
       columns,
+      loading,
+      handleTableChange,
+      handleQuery,
       handleSearch,
       handleReset,
       searchText: '',
       searchInput,
       searchedColumn: '',
 
-      loading,
-      pagination,
-      handleTableChange,
 
       edit,
       add,
+      handleDelete,
 
       main,
       modalVisible,

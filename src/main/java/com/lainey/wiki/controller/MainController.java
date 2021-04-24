@@ -1,6 +1,6 @@
 package com.lainey.wiki.controller;
 
-import com.lainey.wiki.req.MainReq;
+import com.lainey.wiki.req.MainQueryReq;
 import com.lainey.wiki.req.MainSaveReq;
 import com.lainey.wiki.resp.CommonResp;
 import com.lainey.wiki.resp.MainQueryResp;
@@ -23,7 +23,7 @@ public class MainController {
 
     @GetMapping("/list")//接口
 
-    public CommonResp list(MainReq req){
+    public CommonResp list(MainQueryReq req){
         CommonResp<PageResp<MainQueryResp>> resp = new CommonResp<>();
         PageResp<MainQueryResp> list =mainService.list(req);
         resp.setContent(list);
@@ -34,6 +34,12 @@ public class MainController {
     public CommonResp save(@RequestBody MainSaveReq req){
         CommonResp resp = new CommonResp<>();
         mainService.save(req);
+        return resp;
+    }
+    @DeleteMapping("/delete/{albh}")
+    public CommonResp delete(@PathVariable Long albh){
+        CommonResp resp = new CommonResp<>();
+        mainService.delete(albh);
         return resp;
     }
 }

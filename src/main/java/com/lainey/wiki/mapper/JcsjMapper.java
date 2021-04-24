@@ -2,9 +2,8 @@ package com.lainey.wiki.mapper;
 
 import com.lainey.wiki.domain.Jcsj;
 import com.lainey.wiki.domain.JcsjExample;
-import org.apache.ibatis.annotations.Param;
-
 import java.util.List;
+import org.apache.ibatis.annotations.Param;
 
 public interface JcsjMapper {
     long countByExample(JcsjExample example);

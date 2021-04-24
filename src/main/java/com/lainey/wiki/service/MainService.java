@@ -5,12 +5,11 @@ import com.github.pagehelper.PageInfo;
 import com.lainey.wiki.domain.Main;
 import com.lainey.wiki.domain.MainExample;
 import com.lainey.wiki.mapper.MainMapper;
-import com.lainey.wiki.req.MainReq;
+import com.lainey.wiki.req.MainQueryReq;
 import com.lainey.wiki.req.MainSaveReq;
 import com.lainey.wiki.resp.MainQueryResp;
 import com.lainey.wiki.resp.PageResp;
 import com.lainey.wiki.util.CopyUtil;
-import com.lainey.wiki.util.SnowFlake;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -27,11 +26,11 @@ public class MainService {
     @Resource
     private MainMapper mainMapper;
 
-    @Resource
-    private SnowFlake snowFlake;
+//    @Resource
+//    private SnowFlake snowFlake;
 
 
-    public PageResp<MainQueryResp> list(MainReq req){
+    public PageResp<MainQueryResp> list(MainQueryReq req){
         MainExample mainExample = new MainExample();
         MainExample.Criteria criteria=mainExample.createCriteria();
         if (!ObjectUtils.isEmpty(req.getAlbh())){
@@ -71,11 +70,15 @@ public class MainService {
         Main main = CopyUtil.copy(req, Main.class);
         if (ObjectUtils.isEmpty(req.getAlbh())) {
             // 新增
-            main.setAlbh(snowFlake.nextId());
+            // main.setAlbh(snowFlake.nextId());
             mainMapper.insert(main);
         } else {
             // 更新
             mainMapper.updateByPrimaryKey(main);
         }
+    }
+
+    public void delete(Long albh){
+        mainMapper.deleteByPrimaryKey(albh);
     }
 }

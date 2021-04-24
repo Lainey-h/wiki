@@ -2,9 +2,8 @@ package com.lainey.wiki.mapper;
 
 import com.lainey.wiki.domain.Jsjg;
 import com.lainey.wiki.domain.JsjgExample;
-import org.apache.ibatis.annotations.Param;
-
 import java.util.List;
+import org.apache.ibatis.annotations.Param;
 
 public interface JsjgMapper {
     long countByExample(JsjgExample example);
