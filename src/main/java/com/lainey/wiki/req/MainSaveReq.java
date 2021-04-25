@@ -1,6 +1,7 @@
 package com.lainey.wiki.req;
 
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Past;
 import java.util.Date;
 
 public class MainSaveReq {
@@ -8,7 +9,7 @@ public class MainSaveReq {
 
     private String jh;
 
-    @NotNull(message = "【油田名称不能为空】")
+    @NotBlank(message = "【油田名称不能为空】")
     private String ytmc;
 
     private String jx;
@@ -29,6 +30,7 @@ public class MainSaveReq {
 
     private String sglx;
 
+    @Past(message = "事故发生时间不能为将来时")
     private Date sgfssj;
 
     private Double sssj;
