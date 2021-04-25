@@ -136,6 +136,7 @@ import data = _default.data;
 // import { SearchOutlined } from '@ant-design/icons-vue';
 import { Moment } from 'moment';
 import { message } from "ant-design-vue";
+import {Tool} from "@/util/tool";
 
 export default defineComponent({
   name: 'AdminMain',
@@ -430,7 +431,7 @@ export default defineComponent({
      */
     const edit = (record: any) => {
       modalVisible.value = true;
-      main.value = record
+      main.value = Tool.copy(record)
     };
     /**
      * 新增
