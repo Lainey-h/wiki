@@ -23,7 +23,6 @@ public class MainController {
 
 
     @GetMapping("/list")//接口
-
     public CommonResp list(@Valid MainQueryReq req){
         CommonResp<PageResp<MainQueryResp>> resp = new CommonResp<>();
         PageResp<MainQueryResp> list =mainService.list(req);
@@ -32,7 +31,7 @@ public class MainController {
     }
 
     @PostMapping("/save")
-    public CommonResp save(@RequestBody MainSaveReq req){
+    public CommonResp save(@Valid @RequestBody MainSaveReq req){
         CommonResp resp = new CommonResp<>();
         mainService.save(req);
         return resp;

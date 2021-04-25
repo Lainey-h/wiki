@@ -147,7 +147,7 @@ export default defineComponent({
     const mains=ref();
     const  pagination = ref({
       current: 1,
-      pageSize: 1001,
+      pageSize: 8,
       total: 0
     });
     const loading = ref(false);
@@ -379,6 +379,7 @@ export default defineComponent({
         params:{
           page: params.page,
           size: params.size,
+          name: param.value.name
         }
       }).then((response) => {
 
@@ -419,6 +420,8 @@ export default defineComponent({
             page: pagination.value.current,
             size: pagination.value.pageSize,
           });
+        }else{
+          message.error(data.message)
         }
       });
     };
@@ -446,6 +449,8 @@ export default defineComponent({
             page: pagination.value.current,
             size: pagination.value.pageSize,
           });
+        } else {
+          message.error(data.message);
         }
       });
     };

@@ -1,5 +1,6 @@
 package com.lainey.wiki.req;
 
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 public class MainSaveReq {
@@ -7,6 +8,7 @@ public class MainSaveReq {
 
     private String jh;
 
+    @NotNull(message = "【油田名称不能为空】")
     private String ytmc;
 
     private String jx;
