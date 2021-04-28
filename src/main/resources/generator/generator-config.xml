@@ -49,9 +49,11 @@
 
         <!--<table tableName="demo" domainObjectName="Demo"/>-->
         <!--<table tableName="ebook"/>-->
-        <table tableName="main"/>
-        <table tableName="jcsj"/>
-        <table tableName="jsjg"/>
-        <table tableName="fszz"/>
+<!--        <table tableName="main"/>-->
+<!--        <table tableName="jcsj"/>-->
+<!--        <table tableName="jsjg"/>-->
+<!--        <table tableName="fszz"/>-->
+
+        <table tableName="user"/>
     </context>
 </generatorConfiguration>

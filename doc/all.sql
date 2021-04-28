@@ -33,10 +33,22 @@ create table `ebook`(
     `vote_count` int comment '点赞数',
     primary key (`id`)
 
-)engine =innodb default character set =utf8mb4 comment ='电子书'
+)engine =innodb default character set =utf8mb4 comment ='电子书';
 
 insert into `ebook`(id,name,description) value (1,'Spring boot 入门教程零基础入门Java开发','企业级应用开发最佳首选方案');
 insert into `ebook`(id,name,description) value (2,'Vue 入门教程零基础入门Vue开发','企业级应用开发最佳首选框架');
 insert into `ebook`(id,name,description) value (3,'Python入门教程,零基础入门开发','企业级应用开发最佳首选方案');
 insert into `ebook`(id,name,description) value (4,'Mysql入门教程,零基础入门开发','企业级应用开发最佳首选方案');
 insert into `ebook`(id,name,description) value (5,'Oracle入门教程,零基础入门开发','企业级应用开发最佳首选框架');
+
+
+-- 用户表
+drop table if exists `user`;
+create table `user`(
+    `id` bigint not null comment 'ID',
+    `login_name` varchar(50) not null comment'登录名',
+    `name` varchar(50) comment '昵称',
+    `password` char(32) not null comment '密码',
+    primary key (`id`),
+    unique key `login_name_unique` (`login_name`)
+) engine=innodb default charset=utf8mb4 comment='用户';
