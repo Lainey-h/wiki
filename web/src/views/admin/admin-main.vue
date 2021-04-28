@@ -100,6 +100,11 @@
       </a-form-item>
       <a-form-item label="油田名称">
         <a-input v-model:value="main.ytmc" />
+<!--        <a-select v-model:value="main.ytmc" placeholder="请选择油田名称">-->
+<!--          <a-select-option v-for="m in mains" :key="m.ytmc" :value="m.ytmc">-->
+<!--            {{m.ytmc}}-->
+<!--          </a-select-option>-->
+<!--        </a-select>-->
       </a-form-item>
       <a-form-item label="井型">
         <a-input v-model:value="main.jx" />

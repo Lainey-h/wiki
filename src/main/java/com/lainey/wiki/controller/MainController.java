@@ -1,5 +1,6 @@
 package com.lainey.wiki.controller;
 
+import com.lainey.wiki.domain.Main;
 import com.lainey.wiki.req.MainQueryReq;
 import com.lainey.wiki.req.MainSaveReq;
 import com.lainey.wiki.resp.CommonResp;
@@ -42,4 +43,16 @@ public class MainController {
         mainService.delete(albh);
         return resp;
     }
+
+    @GetMapping("/listByAlbh/{albh}")
+    public Main listByAlbh(@PathVariable Long albh){
+        Main listByAlbh = mainService.listByAlbh(albh);
+        return listByAlbh;
+    }
+//    public CommonResp list(MainReq req){
+//        CommonResp<List<MainResp>> resp = new CommonResp<>();
+//        List<MainResp> list =mainService.list(req);
+//        resp.setContent(list);
+//        return resp;
+//    }
 }

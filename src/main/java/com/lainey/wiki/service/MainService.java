@@ -81,4 +81,16 @@ public class MainService {
     public void delete(Long albh){
         mainMapper.deleteByPrimaryKey(albh);
     }
+
+
+    public Main listByAlbh(Long albh){
+          Main listByAlbh= mainMapper.selectByPrimaryKey(albh);
+//        MainExample mainExample = new MainExample();
+//        MainExample.Criteria criteria=mainExample.createCriteria();
+//        criteria.andAlbhEqualTo(req.getAlbh());
+//        List<Main> mainList = mainMapper.selectByExample(mainExample);
+        // List<MainQueryResp> listByAlbh = CopyUtil.copyList(mainList, MainQueryResp.class);
+          return listByAlbh ;
+    }
+
 }
