@@ -10,6 +10,9 @@
       <a-menu-item key="/">
         <router-link to="/">首页</router-link> |
       </a-menu-item>
+      <a-menu-item key="/admin/user">
+        <router-link to="/admin/user">用户管理</router-link> |
+      </a-menu-item>
       <a-menu-item key="/admin/main">
         <router-link to="/admin/main">案例管理</router-link> |
       </a-menu-item>
