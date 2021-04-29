@@ -4,6 +4,8 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.lainey.wiki.domain.User;
 import com.lainey.wiki.domain.UserExample;
+import com.lainey.wiki.exception.BusinessException;
+import com.lainey.wiki.exception.BusinessExceptionCode;
 import com.lainey.wiki.mapper.UserMapper;
 import com.lainey.wiki.req.UserQueryReq;
 import com.lainey.wiki.req.UserSaveReq;
@@ -14,6 +16,7 @@ import com.lainey.wiki.util.SnowFlake;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 import org.springframework.util.ObjectUtils;
 
 import javax.annotation.Resource;
@@ -70,9 +73,15 @@ public class UserService {
     public void save(UserSaveReq req) {
         User user = CopyUtil.copy(req, User.class);
         if (ObjectUtils.isEmpty(req.getId())) {
-            // 新增
-            // user.setId(snowFlake.nextId());
-            userMapper.insert(user);
+            User userDB = selectByLoginName(req.getLoginName()); // userDB 表示从数据库里查出来的用户名
+            if (ObjectUtils.isEmpty(userDB)) {
+                // 新增
+                // user.setId(snowFlake.nextId());
+                userMapper.insert(user);
+            }else {
+                //用户名已存在 抛出自定义异常
+                throw new BusinessException(BusinessExceptionCode.USER_LOGIN_NAME_EXIST);
+            }
         } else {
             // 更新
             userMapper.updateByPrimaryKey(user);
@@ -83,5 +92,16 @@ public class UserService {
         userMapper.deleteByPrimaryKey(id);
     }
 
+    public User selectByLoginName(String loginName){
+        UserExample userExample = new UserExample();
+        UserExample.Criteria criteria = userExample.createCriteria();
+        criteria.andLoginNameEqualTo(loginName);
+        List<User> userList = userMapper.selectByExample(userExample);
+        if (CollectionUtils.isEmpty(userList)){
+            return null;
+        }else {
+            return userList.get(0);
+        }
+    }
 
 }

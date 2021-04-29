@@ -1,6 +1,8 @@
 package com.lainey.wiki.controller;
 
 // import com.lainey.wiki.exception.BusinessException;
+
+import com.lainey.wiki.exception.BusinessException;
 import com.lainey.wiki.resp.CommonResp;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,11 +34,11 @@ public class ControllerExceptionHandler {
         return commonResp;
     }
 
-/*    *//**
+   /**
      * 校验异常统一处理
      * @param e
      * @return
-     *//*
+     */
     @ExceptionHandler(value = BusinessException.class)
     @ResponseBody
     public CommonResp validExceptionHandler(BusinessException e) {
@@ -47,11 +49,11 @@ public class ControllerExceptionHandler {
         return commonResp;
     }
 
-    *//**
+    /**
      * 校验异常统一处理
      * @param e
      * @return
-     *//*
+     */
     @ExceptionHandler(value = Exception.class)
     @ResponseBody
     public CommonResp validExceptionHandler(Exception e) {
@@ -60,5 +62,5 @@ public class ControllerExceptionHandler {
         commonResp.setSuccess(false);
         commonResp.setMessage("系统出现异常，请联系管理员");
         return commonResp;
-    }*/
+    }
 }
