@@ -5,6 +5,7 @@ import com.lainey.wiki.domain.MainExample;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 public interface MainMapper {
     long countByExample(MainExample example);
@@ -21,7 +22,7 @@ public interface MainMapper {
 
     List<Main> selectByExample(MainExample example);
 
-    Main selectByPrimaryKey(Long albh);
+    Map<String,Object> selectByPrimaryKey(Long albh);
 
     int updateByExampleSelective(@Param("record") Main record, @Param("example") MainExample example);
 

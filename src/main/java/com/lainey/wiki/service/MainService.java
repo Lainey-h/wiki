@@ -17,6 +17,7 @@ import org.springframework.util.ObjectUtils;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class MainService {
@@ -83,14 +84,13 @@ public class MainService {
     }
 
 
-    public Main listByAlbh(Long albh){
-          Main listByAlbh= mainMapper.selectByPrimaryKey(albh);
+    public Map<String,Object> listByAlbh(Long albh){
 //        MainExample mainExample = new MainExample();
 //        MainExample.Criteria criteria=mainExample.createCriteria();
 //        criteria.andAlbhEqualTo(req.getAlbh());
 //        List<Main> mainList = mainMapper.selectByExample(mainExample);
         // List<MainQueryResp> listByAlbh = CopyUtil.copyList(mainList, MainQueryResp.class);
-          return listByAlbh ;
+          return mainMapper.selectByPrimaryKey(albh) ;
     }
 
 }

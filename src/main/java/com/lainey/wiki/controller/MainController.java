@@ -1,6 +1,5 @@
 package com.lainey.wiki.controller;
 
-import com.lainey.wiki.domain.Main;
 import com.lainey.wiki.req.MainQueryReq;
 import com.lainey.wiki.req.MainSaveReq;
 import com.lainey.wiki.resp.CommonResp;
@@ -11,6 +10,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController// RestContraller用来返回字符串
 //@Controller//用来返回页面 表示访问地址("/hello")的时候要返回一个页面
@@ -45,9 +46,10 @@ public class MainController {
     }
 
     @GetMapping("/listByAlbh/{albh}")
-    public Main listByAlbh(@PathVariable Long albh){
-        Main listByAlbh = mainService.listByAlbh(albh);
-        return listByAlbh;
+    public Map<String,Object> listByAlbh(@PathVariable Long albh){
+        Map<String,Object> map = new HashMap<>();
+        map = mainService.listByAlbh(albh);
+        return map;
     }
 //    public CommonResp list(MainReq req){
 //        CommonResp<List<MainResp>> resp = new CommonResp<>();

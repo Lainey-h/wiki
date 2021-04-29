@@ -4,7 +4,8 @@
         :style="{ background: '#fff', padding: '24px', margin: 0, minHeight: '280px' }"
     >
 
-      <a-descriptions title="井下复杂情况与事故诊断处理实例" :data-source="mains" bordered>
+
+      <a-descriptions title="井下复杂情况与事故诊断处理实例" :data-source="accidents" bordered>
         <template #renderItem="{ item }">
           <a-descriptions-item label="油田名称">{{item.ytmc}}</a-descriptions-item>
           <a-descriptions-item label="井型">{{item.jx}}</a-descriptions-item>
@@ -46,16 +47,22 @@ export default defineComponent({
 
     const param = ref();
     param.value = {};
-    const mains=ref();
+    const accidents=ref();
 
-    const handleQuery = () => {
-      mains.value = [];
-      axios.get("/main/list",{
+    const handleQuery = (albh: number) => {
+
+      accidents.value = [];
+      // axios.get("/main/list",{
+      //   axios.get("/main/listByAlbh/" + albh",) {
+      axios.get("/main/listByAlbh/" + albh ,{ params:{albh:route.query.mainAlbh}
       }).then((response) => {
         const data = response.data;
         if (data.success){
-          mainAlbh: route.query.mainAlbh;
-          mains.value = data.content;
+          // mainAlbh: route.query.mainAlbh;
+          accidents.value = {
+            albh: route.query.mainAlbh
+          };
+          accidents.value = data.record.content;
         }else {
           message.error(data.message);
         }
@@ -63,11 +70,11 @@ export default defineComponent({
     }
     onMounted(() => {
       console.log("onMounted222");
-      handleQuery();
+      handleQuery;
     })
     return {
       param,
-      mains,
+      accidents,
       handleQuery,
       searchText: '',
       searchedColumn: '',

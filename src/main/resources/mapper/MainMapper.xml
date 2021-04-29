@@ -118,13 +118,9 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
-    select 
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from main
-    where albh = #{albh,jdbcType=BIGINT}
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultType="java.util.Map">
+
+   SELECT * FROM main a left join fszz b on a.albh = b.albh left join jsjg c on a.albh = c.albh where a.albh = #{albh,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from main
