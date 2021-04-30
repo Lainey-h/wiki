@@ -92,8 +92,8 @@
   import { message } from 'ant-design-vue';
   import {Tool} from "@/util/tool";
 
-  // declare let hexMd5: any;
-  // declare let KEY: any;
+  declare let hexMd5: any;  // tips: hexMd5、KEY爆红  声明一下
+  declare let KEY: any;
 
   export default defineComponent({
     name: 'AdminUser',
@@ -173,6 +173,9 @@
       const modalLoading = ref(false);
       const handleModalOk = () => {
         modalLoading.value = true;
+
+        user.value.password = hexMd5(user.value.password + KEY);// hexMD5:在/js/md5.js中的方法
+
         axios.post("/user/save", user.value).then((response) => {
           modalLoading.value = false;
           const data = response.data; // data = commonResp

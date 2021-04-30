@@ -7,6 +7,7 @@ import com.lainey.wiki.resp.PageResp;
 import com.lainey.wiki.resp.UserQueryResp;
 import com.lainey.wiki.service.UserService;
 import com.lainey.wiki.util.SnowFlake;
+import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -35,6 +36,7 @@ public class UserController {
 
     @PostMapping("/save")
     public CommonResp save(@Valid @RequestBody UserSaveReq req){
+        req.setPassword(DigestUtils.md5DigestAsHex(req.getPassword().getBytes())); //让密码加密 通过这句变成32位的16进制的字符串
         CommonResp resp = new CommonResp<>();
         userService.save(req);
         return resp;
