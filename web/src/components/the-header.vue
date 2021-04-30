@@ -87,7 +87,7 @@ export default defineComponent({
           loginModalVisible.value = false;
           message.success("登录成功！");
           user.value = data.content;
-          // store.commit("setUser", data.content);
+          store.commit("setUser", data.content); // 触发store的setUser方法（该方法有两个参数，第一个是自带的 不用写）
         } else {
           message.error(data.message);
         }

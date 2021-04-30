@@ -1,12 +1,18 @@
 import { createStore } from 'vuex'
 
-export default createStore({
-  state: {
+ const store = createStore({
+  state: { // 全局变量
+    user: {}
   },
-  mutations: {
+  mutations: { // 对变量的操作都写在该方法中 同步
+    setUser(state,user){
+      state.user = user;
+    }
+
   },
-  actions: {
+  actions: { // // 对变量的操作都写在该方法中 支持异步
   },
   modules: {
   }
 })
+export default store;
