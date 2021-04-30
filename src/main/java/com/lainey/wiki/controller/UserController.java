@@ -1,6 +1,7 @@
 package com.lainey.wiki.controller;
 
 import com.lainey.wiki.req.UserQueryReq;
+import com.lainey.wiki.req.UserResetPasswordReq;
 import com.lainey.wiki.req.UserSaveReq;
 import com.lainey.wiki.resp.CommonResp;
 import com.lainey.wiki.resp.PageResp;
@@ -41,11 +42,20 @@ public class UserController {
         userService.save(req);
         return resp;
     }
+
     @DeleteMapping("/delete/{id}")
     public CommonResp delete(@PathVariable Long id){
         CommonResp resp = new CommonResp<>();
         userService.delete(id);
         return resp;
     }
-    
+
+    @PostMapping("/reset-password")
+    public CommonResp resetPassword(@Valid @RequestBody UserResetPasswordReq req){
+        req.setPassword(DigestUtils.md5DigestAsHex(req.getPassword().getBytes())); //让密码加密 通过这句变成32位的16进制的字符串
+        CommonResp resp = new CommonResp<>();
+        userService.ResetPassword(req);
+        return resp;
+    }
+
 }

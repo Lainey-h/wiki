@@ -8,6 +8,7 @@ import com.lainey.wiki.exception.BusinessException;
 import com.lainey.wiki.exception.BusinessExceptionCode;
 import com.lainey.wiki.mapper.UserMapper;
 import com.lainey.wiki.req.UserQueryReq;
+import com.lainey.wiki.req.UserResetPasswordReq;
 import com.lainey.wiki.req.UserSaveReq;
 import com.lainey.wiki.resp.PageResp;
 import com.lainey.wiki.resp.UserQueryResp;
@@ -104,6 +105,16 @@ public class UserService {
         }else {
             return userList.get(0);
         }
+    }
+
+
+    /**
+     * 重置密码
+     * @param req
+     */
+    public void ResetPassword(UserResetPasswordReq req) {
+        User user = CopyUtil.copy(req, User.class); // 拷贝 拷贝成数据库的实体user 这个req只有id和password有值 这里的user跟req有一个字段映射的 也只有id和password有值
+        userMapper.updateByPrimaryKeySelective(user);
     }
 
 }
