@@ -84,6 +84,8 @@ public class UserService {
             }
         } else {
             // 更新
+            user.setLoginName(null); // 修改的时候不修改用户名
+            user.setPassword(null);
             userMapper.updateByPrimaryKeySelective(user);
         }
     }
