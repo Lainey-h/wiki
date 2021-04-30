@@ -18,3 +18,15 @@ name=TEST
 
 ###
 GET http://localhost:8880/test/list
+
+
+###
+GET http://localhost:8880/test/redis/set/happy123/测试token
+Accept: application/json
+
+###
+
+GET http://localhost:8880/redis/get/43305884046200832
+Accept: application/json
+
+###
