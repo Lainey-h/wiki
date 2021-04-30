@@ -1,10 +1,12 @@
 package com.lainey.wiki.controller;
 
+import com.lainey.wiki.req.UserLoginReq;
 import com.lainey.wiki.req.UserQueryReq;
 import com.lainey.wiki.req.UserResetPasswordReq;
 import com.lainey.wiki.req.UserSaveReq;
 import com.lainey.wiki.resp.CommonResp;
 import com.lainey.wiki.resp.PageResp;
+import com.lainey.wiki.resp.UserLoginResp;
 import com.lainey.wiki.resp.UserQueryResp;
 import com.lainey.wiki.service.UserService;
 import com.lainey.wiki.util.SnowFlake;
@@ -55,6 +57,15 @@ public class UserController {
         req.setPassword(DigestUtils.md5DigestAsHex(req.getPassword().getBytes())); //让密码加密 通过这句变成32位的16进制的字符串
         CommonResp resp = new CommonResp<>();
         userService.ResetPassword(req);
+        return resp;
+    }
+
+    @PostMapping("/login")
+    public CommonResp login(@Valid @RequestBody UserLoginReq req){
+        req.setPassword(DigestUtils.md5DigestAsHex(req.getPassword().getBytes())); // 注册的时候（添加用户的时候，密码是经过两层加密的，登陆的时候也应该经过两层加密 这样才能将两层加密后的密文跟数据库进行对比 进行校验）
+        CommonResp<UserLoginResp> resp = new CommonResp<>();
+        UserLoginResp userLoginResp = userService.login(req);
+        resp.setContent(userLoginResp);
         return resp;
     }
 

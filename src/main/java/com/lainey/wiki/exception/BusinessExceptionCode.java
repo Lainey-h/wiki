@@ -3,6 +3,7 @@ package com.lainey.wiki.exception;
 public enum BusinessExceptionCode {
 // 枚举 之后的业务校验就在这里增加一个枚举即可
     USER_LOGIN_NAME_EXIST("登录名已存在"),
+    USER_USER_ERROR("用户名不存在或密码错误"),
     ;
 
     private String desc;

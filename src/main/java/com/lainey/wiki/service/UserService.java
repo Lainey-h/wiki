@@ -7,10 +7,12 @@ import com.lainey.wiki.domain.UserExample;
 import com.lainey.wiki.exception.BusinessException;
 import com.lainey.wiki.exception.BusinessExceptionCode;
 import com.lainey.wiki.mapper.UserMapper;
+import com.lainey.wiki.req.UserLoginReq;
 import com.lainey.wiki.req.UserQueryReq;
 import com.lainey.wiki.req.UserResetPasswordReq;
 import com.lainey.wiki.req.UserSaveReq;
 import com.lainey.wiki.resp.PageResp;
+import com.lainey.wiki.resp.UserLoginResp;
 import com.lainey.wiki.resp.UserQueryResp;
 import com.lainey.wiki.util.CopyUtil;
 import com.lainey.wiki.util.SnowFlake;
@@ -115,6 +117,29 @@ public class UserService {
     public void ResetPassword(UserResetPasswordReq req) {
         User user = CopyUtil.copy(req, User.class); // 拷贝 拷贝成数据库的实体user 这个req只有id和password有值 这里的user跟req有一个字段映射的 也只有id和password有值
         userMapper.updateByPrimaryKeySelective(user);
+    }
+    /**
+     * 登录
+     */
+    public UserLoginResp login(UserLoginReq req) {
+        User userDb = selectByLoginName(req.getLoginName());
+        if (ObjectUtils.isEmpty(userDb)){
+            // 用户名不存在
+            LOG.info("用户名不存在,{}",req.getLoginName());
+            throw new BusinessException(BusinessExceptionCode.USER_USER_ERROR); // 无论是密码不正确还是用户名不存在 都给前端一个模糊的提示   但是日志打印应该越详细越好 方便生产运维 不能坑自己
+        }else{
+            if (userDb.getPassword().equals(req.getPassword())){
+                // 登录成功
+                UserLoginResp userLoginResp = CopyUtil.copy(userDb,UserLoginResp.class);
+                return userLoginResp;
+            }
+
+        else {
+            // 密码不正确
+            LOG.info("密码不正确,{}",req.getPassword(),userDb.getPassword());
+            throw new BusinessException(BusinessExceptionCode.USER_USER_ERROR); // 无论是密码不正确还是用户名不存在 都给前端一个模糊的提示
+            }
+        }
     }
 
 }
