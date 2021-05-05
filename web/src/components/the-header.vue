@@ -48,7 +48,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref,} from 'vue';
+import {computed, defineComponent, ref,} from 'vue';
 import axios from 'axios';
 import { message } from 'ant-design-vue';
 import store from "@/store";
@@ -62,8 +62,10 @@ export default defineComponent({
 
   setup () {
     // 登陆后保存
-    const user  = ref(); // user:从后端返回出来的登录信息
-    user.value={}; //初始给他一个空对象，避免空指针异常
+    // const user  = ref(); // user:从后端返回出来的登录信息
+    // user.value={}; //初始给他一个空对象，避免空指针异常
+     const user = computed(() => store.state.user); // 这个user会去通过computed来实时监听store里的user  前端登录成功（在the-header中写的）后会调用setUser为user赋值，这个footer就可以监听到
+
     // 用来登录
     const loginUser = ref({
       loginName: "test",
@@ -86,8 +88,8 @@ export default defineComponent({
         if (data.success) {
           loginModalVisible.value = false;
           message.success("登录成功！");
-          user.value = data.content;
-          store.commit("setUser", data.content); // 触发store的setUser方法（该方法有两个参数，第一个是自带的 不用写）
+         // user.value = data.content;
+          store.commit("setUser", user.value); // 触发store的setUser方法（该方法有两个参数，第一个是自带的 不用写）
         } else {
           message.error(data.message);
         }
