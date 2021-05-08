@@ -47,7 +47,7 @@
         @ok="login"
     >
       <a-form :model="loginUser" :label-col="{ span: 6 }" :wrapper-col="{ span: 18 }">
-        <a-form-item label="登录名">
+        <a-form-item label="用户名">
           <a-input v-model:value="loginUser.loginName" />
         </a-form-item>
         <a-form-item label="密码">
@@ -92,7 +92,7 @@ export default defineComponent({
     const login = () => {
       console.log("开始登录");
       loginModalLoading.value = true;
-      loginUser.value.password = hexMd5(loginUser.value.password + KEY);
+     //  loginUser.value.password = hexMd5(loginUser.value.password + KEY);
       axios.post('/user/login', loginUser.value).then((response) => {
         loginModalLoading.value = false;
         const data = response.data;

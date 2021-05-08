@@ -162,28 +162,28 @@ export default defineComponent({
     });
 
     const searchInput = ref();
-
+// 这个是表格的列 里面有好多渲染在详情页用过不到
     const columns = [
       {
         title: '案例编号',
         dataIndex: 'albh',
         width: 100,
         fixed: 'left',
-        slots: {
-          filterDropdown: 'filterDropdown',
-          filterIcon: 'filterIcon',
-          customRender: 'customRender',
-        },
-        onFilter: (value: any, record: any) =>
-            record.albh.toString().toLowerCase().includes(value.toLowerCase()),
-        onFilterDropdownVisibleChange: (visible: any) => {
-          if (visible) {
-            setTimeout(() => {
-              console.log(searchInput.value);
-              searchInput.value.focus();
-            }, 0);
-          }
-        },
+        // slots: {
+        //   filterDropdown: 'filterDropdown',
+        //   filterIcon: 'filterIcon',
+        //   customRender: 'customRender',
+        // },
+        // onFilter: (value: any, record: any) =>
+        //     record.albh.toString().toLowerCase().includes(value.toLowerCase()),
+        // onFilterDropdownVisibleChange: (visible: any) => {
+        //   if (visible) {
+        //     setTimeout(() => {
+        //       console.log(searchInput.value);
+        //       searchInput.value.focus();
+        //     }, 0);
+        //   }
+        // },
       },
       {
         title: '井号',
@@ -364,214 +364,7 @@ export default defineComponent({
       }
     ];
 
-    // const columns = [
-    //   {
-    //     title: '案例编号',
-    //     dataIndex: 'albh',
-    //     width: 150,
-    //     fixed: 'left',
-    //     slots: {
-    //       filterDropdown: 'filterDropdown',
-    //       filterIcon: 'filterIcon',
-    //       customRender: 'customRender',
-    //     },
-    //     onFilter: (value: any, record: any) =>
-    //         record.albh.toString().toLowerCase().includes(value.toLowerCase()),
-    //     onFilterDropdownVisibleChange: (visible: any) => {
-    //       if (visible) {
-    //         setTimeout(() => {
-    //           console.log(searchInput.value);
-    //           searchInput.value.focus();
-    //         }, 0);
-    //       }
-    //     },
-    //   },
-    //   {
-    //     title: '井号',
-    //     dataIndex: 'jh',
-    //     width: 50,
-    //     slots: {
-    //       filterDropdown: 'filterDropdown',
-    //       filterIcon: 'filterIcon',
-    //       customRender: 'customRender',
-    //     },
-    //     onFilter: (value: any, record: any) =>
-    //         record.jh.toString().toLowerCase().includes(value.toLowerCase()),
-    //     onFilterDropdownVisibleChange: (visible: any) => {
-    //       if (visible) {
-    //         setTimeout(() => {
-    //           searchInput.value.focus();
-    //         });
-    //       }
-    //     },
-    //   },
-    //   {
-    //     title: '油田名称',
-    //     dataIndex: 'ytmc',
-    //     width: 50,
-    //     slots: {
-    //       filterDropdown: 'filterDropdown',
-    //       filterIcon: 'filterIcon',
-    //       customRender: 'customRender',
-    //     },
-    //     onFilter: (value: any, record: any) =>
-    //         record.ytmc.toString().toLowerCase().includes(value.toLowerCase()),
-    //     onFilterDropdownVisibleChange: (visible: any) => {
-    //       if (visible) {
-    //         setTimeout(() => {
-    //           searchInput.value.focus();
-    //         });
-    //       }
-    //     },
-    //   },
-    //   {
-    //     title: '井型',
-    //     dataIndex: 'jx',
-    //     width: 50,
-    //     slots: {
-    //       filterDropdown: 'filterDropdown',
-    //       filterIcon: 'filterIcon',
-    //       customRender: 'customRender',
-    //     },
-    //     onFilter: (value: any, record: any) =>
-    //         record.jx.toString().toLowerCase().includes(value.toLowerCase()),
-    //     onFilterDropdownVisibleChange: (visible: any) => {
-    //       if (visible) {
-    //         setTimeout(() => {
-    //           console.log(searchInput.value);
-    //           searchInput.value.focus();
-    //         }, 0);
-    //       }
-    //     },
-    //   },
-    //   {
-    //     title: '事故类型',
-    //     dataIndex: 'sglx',
-    //     width: 50,
-    //     slots: {
-    //       filterDropdown: 'filterDropdown',
-    //       filterIcon: 'filterIcon',
-    //       customRender: 'customRender',
-    //     },
-    //     onFilter: (value: any, record: any) =>
-    //         record.sglx.toString().toLowerCase().includes(value.toLowerCase()),
-    //     onFilterDropdownVisibleChange: (visible: any) => {
-    //       if (visible) {
-    //         setTimeout(() => {
-    //           console.log(searchInput.value);
-    //           searchInput.value.focus();
-    //         }, 0);
-    //       }
-    //     },
-    //   },
-    //   {
-    //     title: '钻遇地层',
-    //     dataIndex: 'zydc',
-    //     width: 50,
-    //     slots: {
-    //       filterDropdown: 'filterDropdown',
-    //       filterIcon: 'filterIcon',
-    //       customRender: 'customRender',
-    //     },
-    //     onFilter: (value: any, record: any) =>
-    //         record.zydc.toString().toLowerCase().includes(value.toLowerCase()),
-    //     onFilterDropdownVisibleChange: (visible: any) => {
-    //       if (visible) {
-    //         setTimeout(() => {
-    //           console.log(searchInput.value);
-    //           searchInput.value.focus();
-    //         }, 0);
-    //       }
-    //     },
-    //   },
-    //   {
-    //     title: '事故发生起始井深',
-    //     dataIndex: 'zs',
-    //     width: 50,
-    //     slots: {
-    //       filterDropdown: 'filterDropdown',
-    //       filterIcon: 'filterIcon',
-    //       customRender: 'customRender',
-    //     },
-    //     onFilter: (value: any, record: any) =>
-    //         record.zs.toString().toLowerCase().includes(value.toLowerCase()),
-    //     onFilterDropdownVisibleChange: (visible: any) => {
-    //       if (visible) {
-    //         setTimeout(() => {
-    //           console.log(searchInput.value);
-    //           searchInput.value.focus();
-    //         }, 0);
-    //       }
-    //     },
-    //   },
-    //   {
-    //     title: '事故发生终止井深',
-    //     dataIndex: 'zzjs',
-    //     width: 50,
-    //     slots: {
-    //       filterDropdown: 'filterDropdown',
-    //       filterIcon: 'filterIcon',
-    //       customRender: 'customRender',
-    //     },
-    //     onFilter: (value: any, record: any) =>
-    //         record.zzjs.toString().toLowerCase().includes(value.toLowerCase()),
-    //     onFilterDropdownVisibleChange: (visible: any) => {
-    //       if (visible) {
-    //         setTimeout(() => {
-    //           console.log(searchInput.value);
-    //           searchInput.value.focus();
-    //         }, 0);
-    //       }
-    //     },
-    //   },
-    //   {
-    //     title: '损失时间',
-    //     dataIndex: 'sssj',
-    //     width: 50,
-    //     slots: {
-    //       filterDropdown: 'filterDropdown',
-    //       filterIcon: 'filterIcon',
-    //       customRender: 'customRender',
-    //     },
-    //     onFilter: (value: any, record: any) =>
-    //         record.sssj.toString().toLowerCase().includes(value.toLowerCase()),
-    //     onFilterDropdownVisibleChange: (visible: any) => {
-    //       if (visible) {
-    //         setTimeout(() => {
-    //           console.log(searchInput.value);
-    //           searchInput.value.focus();
-    //         }, 0);
-    //       }
-    //     },
-    //   },
-    //   {
-    //     title: '事故发生时间',
-    //     dataIndex: 'sgfssj',
-    //     width: 50,
-    //     slots: {
-    //       filterDropdown: 'filterDropdown',
-    //       filterIcon: 'filterIcon',
-    //       customRender: 'customRender',
-    //     },
-    //     onFilter: (value: any, record: any) =>
-    //         record.sgfssj.toString().toLowerCase().includes(value.toLowerCase()),
-    //     onFilterDropdownVisibleChange: (visible: any) => {
-    //       if (visible) {
-    //         setTimeout(() => {
-    //           console.log(searchInput.value);
-    //           searchInput.value.focus();
-    //         }, 0);
-    //       }
-    //     },
-    //   },
-    //   {
-    //     title: 'Action',
-    //     key: 'operation',
-    //     fixed: 'right',
-    //     width: 100,
-    //     slots: { customRender: 'action' },
-    //   }
-    // ];
+
 
     const handleSearch = (selectedKeys: any, confirm: any, dataIndex: any) => {
       confirm();

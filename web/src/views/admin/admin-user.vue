@@ -6,7 +6,7 @@
       <p>
         <a-form layout="inline" :model="param">
           <a-form-item>
-            <a-input v-model:value="param.loginName" placeholder="登陆名">
+            <a-input v-model:value="param.loginName" placeholder="用户名">
             </a-input>
           </a-form-item>
           <a-form-item>
@@ -60,7 +60,7 @@
     @ok="handleModalOk"
   >
     <a-form :model="user" :label-col="{ span: 6 }" :wrapper-col="{ span: 18 }">
-      <a-form-item label="登陆名">
+      <a-form-item label="用户名">
         <a-input v-model:value="user.loginName" :disabled="!!user.id" />
       </a-form-item>
       <a-form-item label="昵称">
@@ -80,7 +80,8 @@
   >
     <a-form :model="user" :label-col="{ span: 6 }" :wrapper-col="{ span: 18 }">
       <a-form-item label="新密码">
-        <a-input v-model:value="user.password"/>
+        <a-input-password v-model:value="user.password" placeholder="请输入新密码" />
+<!--        <a-input v-model:value="user.password"/>-->
       </a-form-item>
     </a-form>
   </a-modal>
@@ -110,7 +111,7 @@
 
       const columns = [
         {
-          title: '登陆名',
+          title: '用户名',
           dataIndex: 'loginName'
         },
         {
@@ -174,12 +175,18 @@
       const handleModalOk = () => {
         modalLoading.value = true;
 
-        user.value.password = hexMd5(user.value.password + KEY);// hexMD5:在/js/md5.js中的方法
+        // if(user.value.password){
+        //   user.value.password = hexMd5(user.value.password + KEY);
+        // }
 
         axios.post("/user/save", user.value).then((response) => {
           modalLoading.value = false;
           const data = response.data; // data = commonResp
+          // user.value.password = hexMd5(user.value.password + KEY);// hexMD5:在/js/md5.js中的方法
           if (data.success) {
+            // if(user.value.password){
+            //   user.value.password = hexMd5(user.value.password + KEY);
+            // }
             modalVisible.value = false;
 
             // 重新加载列表
@@ -230,13 +237,15 @@
       const resetModalLoading = ref(false);
       const handleResetModalOk = () => {
         resetModalLoading.value = true;
-
-        user.value.password = hexMd5(user.value.password + KEY);
+        // if(user.value.password){
+        //   user.value.password = hexMd5(user.value.password + KEY);
+        // }
 
         axios.post("/user/reset-password", user.value).then((response) => {
           resetModalLoading.value = false;
           const data = response.data; // data = commonResp
           if (data.success) {
+
             resetModalVisible.value = false;
 
             // 重新加载列表
