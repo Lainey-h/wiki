@@ -13,7 +13,7 @@ import javax.validation.Valid;
 
 @RestController// RestContraller用来返回字符串
 //@Controller//用来返回页面 表示访问地址("/hello")的时候要返回一个页面
-@RequestMapping("/jsjg")
+@RequestMapping("/jsjgs")
 
 public class JsjgController {
 
@@ -36,10 +36,10 @@ public class JsjgController {
         jsjgService.save(req);
         return resp;
     }
-    @DeleteMapping("/delete/{albh}")
-    public CommonResp delete(@PathVariable Long albh){
-        CommonResp resp = new CommonResp<>();
-        jsjgService.delete(albh);
-        return resp;
-    }
+//    @DeleteMapping("/delete/{albh}")
+//    public CommonResp delete(@PathVariable Long albh){
+//        CommonResp resp = new CommonResp<>();
+//        jsjgService.delete(albh);
+//        return resp;
+//    }
 }

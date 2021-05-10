@@ -1,11 +1,11 @@
 package com.lainey.wiki.mapper;
 
+import com.lainey.wiki.domain.All;
 import com.lainey.wiki.domain.Main;
 import com.lainey.wiki.domain.MainExample;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
-import java.util.Map;
 
 public interface MainMapper {
     long countByExample(MainExample example);
@@ -22,7 +22,7 @@ public interface MainMapper {
 
     List<Main> selectByExample(MainExample example);
 
-    Map<String,Object> selectByPrimaryKey(Long albh);
+    All selectByPrimaryKey(Long albh);
 
     int updateByExampleSelective(@Param("record") Main record, @Param("example") MainExample example);
 
@@ -35,4 +35,8 @@ public interface MainMapper {
     int updateByPrimaryKeyWithBLOBs(Main record);
 
     int updateByPrimaryKey(Main record);
+
+    List<All> settAll();
+
+    Long queryMaxAlbh();
 }

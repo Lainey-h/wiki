@@ -24,6 +24,19 @@
     <result column="sgclms" jdbcType="LONGVARCHAR" property="sgclms" />
     <result column="zjclyj" jdbcType="LONGVARCHAR" property="zjclyj" />
   </resultMap>
+  <resultMap extends="BaseResultMap" id="QueryMap" type="com.lainey.wiki.domain.All">
+    <result column="tgdbsd" jdbcType="DOUBLE" property="tgdbsd" />
+    <result column="tgwj" jdbcType="DOUBLE" property="tgwj" />
+    <result column="tgxsd" jdbcType="DOUBLE" property="tgxsd" />
+    <result column="gzfs" jdbcType="LONGVARCHAR" property="gzfs" />
+    <result column="sgfsqhbs" jdbcType="LONGVARCHAR" property="sgfsqhbs" />
+    <result column="sgzzlx" jdbcType="LONGVARCHAR" property="sgzzlx" />
+    <result column="sgzzbm" jdbcType="LONGVARCHAR" property="sgzzbm" />
+    <result column="ydzk" jdbcType="LONGVARCHAR" property="ydzk" />
+    <result column="ydcs" jdbcType="LONGVARCHAR" property="ydcs" />
+    <result column="dw" jdbcType="LONGVARCHAR" property="dw" />
+    <result column="sxlb" jdbcType="LONGVARCHAR" property="sxlb" />
+  </resultMap>
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
@@ -118,7 +131,7 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultType="java.util.Map">
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="QueryMap">
 
    SELECT * FROM main a left join fszz b on a.albh = b.albh left join jsjg c on a.albh = c.albh where a.albh = #{albh,jdbcType=BIGINT}
   </select>
@@ -380,7 +393,11 @@
       sgfssj = #{record.sgfssj,jdbcType=TIMESTAMP},
       sssj = #{record.sssj,jdbcType=DOUBLE},
       slly = #{record.slly,jdbcType=VARCHAR},
-      bz = #{record.bz,jdbcType=VARCHAR}
+      bz = #{record.bz,jdbcType=VARCHAR},
+      sgfsms = #{record.sgfsms,jdbcType=LONGVARCHAR},
+      sgclms = #{record.sgclms,jdbcType=LONGVARCHAR},
+      zjclyj = #{record.zjclyj,jdbcType=LONGVARCHAR}
+
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -464,7 +481,7 @@
       bz = #{bz,jdbcType=VARCHAR},
       sgfsms = #{sgfsms,jdbcType=LONGVARCHAR},
       sgclms = #{sgclms,jdbcType=LONGVARCHAR},
-      zjclyj = #{zjclyj,jdbcType=LONGVARCHAR}
+      zjclyj = #{zjclyj,jdbcType=LONGVARCHAR},
     where albh = #{albh,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.lainey.wiki.domain.Main">
@@ -482,8 +499,17 @@
       sglx = #{sglx,jdbcType=VARCHAR},
       sgfssj = #{sgfssj,jdbcType=TIMESTAMP},
       sssj = #{sssj,jdbcType=DOUBLE},
+      sgfsms = #{sgfsms,jdbcType=LONGVARCHAR},
+      sgclms = #{sgclms,jdbcType=LONGVARCHAR},
+      zjclyj = #{zjclyj,jdbcType=LONGVARCHAR},
       slly = #{slly,jdbcType=VARCHAR},
       bz = #{bz,jdbcType=VARCHAR}
     where albh = #{albh,jdbcType=BIGINT}
   </update>
+  <select id="settAll" resultType="com.lainey.wiki.domain.All">
+     SELECT * FROM main a left join fszz b on a.albh = b.albh left join jsjg c on a.albh = c.albh
+  </select>
+  <select id="queryMaxAlbh" resultType="long">
+    SELECT albh FROM `main` order by albh desc LIMIT 1
+  </select>
 </mapper>

@@ -1,5 +1,6 @@
 package com.lainey.wiki.controller;
 
+import com.lainey.wiki.domain.All;
 import com.lainey.wiki.req.MainQueryReq;
 import com.lainey.wiki.req.MainSaveReq;
 import com.lainey.wiki.resp.CommonResp;
@@ -10,8 +11,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController// RestContraller用来返回字符串
 //@Controller//用来返回页面 表示访问地址("/hello")的时候要返回一个页面
@@ -24,7 +25,7 @@ public class MainController {
     private MainService mainService;
 
 
-    @GetMapping("/list")//接口
+    @GetMapping("/list")//接口 那个调的这个接口，
     public CommonResp list(@Valid MainQueryReq req){
         CommonResp<PageResp<MainQueryResp>> resp = new CommonResp<>();
         PageResp<MainQueryResp> list =mainService.list(req);
@@ -46,15 +47,14 @@ public class MainController {
     }
 
     @GetMapping("/listByAlbh/{albh}")
-    public Map<String,Object> listByAlbh(@PathVariable Long albh){
-        Map<String,Object> map = new HashMap<>();
-        map = mainService.listByAlbh(albh);
-        return map;
+    public List<All> listByAlbh(@PathVariable Long albh){
+        All all = new All();
+        all = mainService.listByAlbh(albh);
+        List<All> list = new ArrayList<>();
+        list.add(all);
+        return list;
     }
-//    public CommonResp list(MainReq req){
-//        CommonResp<List<MainResp>> resp = new CommonResp<>();
-//        List<MainResp> list =mainService.list(req);
-//        resp.setContent(list);
-//        return resp;
-//    }
+
+
+
 }

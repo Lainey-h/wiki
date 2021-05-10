@@ -211,6 +211,7 @@
       tgdbsd = #{record.tgdbsd,jdbcType=DOUBLE},
       tgwj = #{record.tgwj,jdbcType=DOUBLE},
       tgxsd = #{record.tgxsd,jdbcType=DOUBLE}
+      tgmc = #{record.tgmc,jdbcType=LONGVARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -245,7 +246,8 @@
     update jsjg
     set tgdbsd = #{tgdbsd,jdbcType=DOUBLE},
       tgwj = #{tgwj,jdbcType=DOUBLE},
-      tgxsd = #{tgxsd,jdbcType=DOUBLE}
+      tgxsd = #{tgxsd,jdbcType=DOUBLE},
+      tgmc = #{tgmc,jdbcType=LONGVARCHAR}
     where albh = #{albh,jdbcType=BIGINT}
   </update>
 </mapper>

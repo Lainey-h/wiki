@@ -320,7 +320,15 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.lainey.wiki.domain.Fszz">
     update fszz
-    set qz = #{qz,jdbcType=DOUBLE}
+    set qz = #{qz,jdbcType=DOUBLE},
+    gzfs = #{gzfs,jdbcType=LONGVARCHAR},
+      sgfsqhbs = #{sgfsqhbs,jdbcType=LONGVARCHAR},
+      sgzzlx = #{sgzzlx,jdbcType=LONGVARCHAR},
+      sgzzbm = #{sgzzbm,jdbcType=LONGVARCHAR},
+      ydzk = #{ydzk,jdbcType=LONGVARCHAR},
+      ydcs = #{ydcs,jdbcType=LONGVARCHAR},
+      dw = #{dw,jdbcType=LONGVARCHAR},
+      sxlb = #{sxlb,jdbcType=LONGVARCHAR}
     where albh = #{albh,jdbcType=BIGINT}
   </update>
 </mapper>

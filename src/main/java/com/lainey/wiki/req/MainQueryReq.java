@@ -37,7 +37,7 @@ public class MainQueryReq extends PageReq{
 
     private String sgfsms;
 
-    private String sgclgc;
+    private String sgclms;
 
     private String zjclyj;
 
@@ -177,12 +177,12 @@ public class MainQueryReq extends PageReq{
         this.sgfsms = sgfsms;
     }
 
-    public String getSgclgc() {
-        return sgclgc;
+    public String getSgclms() {
+        return sgclms;
     }
 
-    public void setSgclgc(String sgclgc) {
-        this.sgclgc = sgclgc;
+    public void setSgclms(String sgclms) {
+        this.sgclms = sgclms;
     }
 
     public String getZjclyj() {
@@ -216,7 +216,7 @@ public class MainQueryReq extends PageReq{
         sb.append(", slly=").append(slly);
         sb.append(", bz=").append(bz);
         sb.append(", sgfsms=").append(sgfsms);
-        sb.append(", sgclgc=").append(sgclgc);
+        sb.append(", sgclms=").append(sgclms);
         sb.append(", zjclyj=").append(zjclyj);
         sb.append("]");
         return sb.toString();

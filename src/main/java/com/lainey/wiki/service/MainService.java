@@ -2,6 +2,7 @@ package com.lainey.wiki.service;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.lainey.wiki.domain.All;
 import com.lainey.wiki.domain.Main;
 import com.lainey.wiki.domain.MainExample;
 import com.lainey.wiki.mapper.MainMapper;
@@ -17,7 +18,6 @@ import org.springframework.util.ObjectUtils;
 
 import javax.annotation.Resource;
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class MainService {
@@ -84,7 +84,7 @@ public class MainService {
     }
 
 
-    public Map<String,Object> listByAlbh(Long albh){
+    public All listByAlbh(Long albh){
 //        MainExample mainExample = new MainExample();
 //        MainExample.Criteria criteria=mainExample.createCriteria();
 //        criteria.andAlbhEqualTo(req.getAlbh());
@@ -92,5 +92,6 @@ public class MainService {
         // List<MainQueryResp> listByAlbh = CopyUtil.copyList(mainList, MainQueryResp.class);
           return mainMapper.selectByPrimaryKey(albh) ;
     }
+
 
 }
